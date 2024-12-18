@@ -14,14 +14,14 @@
         <div class="nav hidden lg:flex w-full lg:w-10/12 lg:items-center flex-col lg:flex-row">
             <div class="w-full">
                 <ul class="w-full flex lg:items-center flex-col lg:flex-row">
-                    <a href="#" class="text-white hover:text-green-400">
+                    <a href="{{ route('index') }}" class="text-white hover:text-green-400">
                         <li class="w-fit py-1 lg:px-4 text-lg">Home</li>
                     </a>
-                    <a href="#" class="text-white hover:text-green-400">
-                        <li class="w-fit py-1 lg:px-4 text-lg">About Us</li>
+                    <a href="{{ route('latest') }}" class="text-white hover:text-green-400">
+                        <li class="w-fit py-1 lg:px-4 text-lg">Latest</li>
                     </a>
-                    <a href="#" class="text-white hover:text-green-400">
-                        <li class="w-fit py-1 lg:px-4 text-lg">Latest News</li>
+                    <a href="{{ route('contact') }}" class="text-white hover:text-green-400">
+                        <li class="w-fit py-1 lg:px-4 text-lg">Contact Us</li>
                     </a>
                 </ul>
             </div>

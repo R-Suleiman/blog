@@ -11,7 +11,10 @@
 </head>
 <body>
     <x-navbar />
+
  @yield('content')
+
+    <x-footer />
 
  @include('partials.jslinks')
 </body>
