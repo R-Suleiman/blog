@@ -1,9 +1,24 @@
-@extends('layouts.app')
-@section('title', 'Post')
+@extends('layouts.admin')
+@section('title', 'Dashboard')
 @section('content')
 
-    <section class="w-full">
-        <div class="w-11/12 md:w-9/12 mx-auto my-8 md:p-8">
+    <section class="w-11/12 mx-auto p-2">
+        <div class="w-full my-8 md:p-8">
+
+            <div class="w-fit mb-4 ml-auto flex flex-col md:flex-row items-center">
+                <button
+                    class="py-1 px-4 border border-green-400 text-green-400 text-lg rounded-xl hover:bg-gray-800 hover:text-white my-2 mr-2"><a
+                        href="{{ route('admin.post.edit', ['which_posts' => $which_posts, 'post' => $post]) }}">Edit Post</a></button>
+
+                <form action="{{ route('admin.post.destroy', ['which_posts' => $which_posts, 'post' => $post]) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button
+                        class="py-1 px-4 border border-red-600 text-red-600 text-lg rounded-xl hover:bg-red-800 hover:text-white my-2 mr-2"
+                        onclick="return confirm('Are you sure you want to Delete this Post')">Delete Post</button>
+                </form>
+            </div>
+
             <div class="w-full flex items-center justify-between">
                 <span class="bg-green-400 text-gray-800 py-1 px-4 text-lg">{{ $post->category->category }}</span>
                 <span class="text-gray-500">Posted on:
@@ -11,12 +26,14 @@
             </div>
             <div class="w-full overflow-hidden my-2">
                 @if ($post->file_type == 'Image')
-                    <img src="{{ asset('/storage/files/posts/' . $post->file) }}" alt="post image" class="w-full object-fill">
+                    <img src="{{ asset('/storage/files/posts/' . $post->file) }}" alt="post image"
+                        class="w-full object-fill">
                 @else
                     <video src="{{ asset('/storage/files/posts/' . $post->file) }}" controls>
                         Your browser does not support video!
                     </video>
                 @endif
+
             </div>
             <div class="w-full flex items-center my-4">
                 <div class="w-16 rounded-full border border-green-400"><img
@@ -24,7 +41,7 @@
                         alt="author photo" class="object-center w-full rounded-full"></div>
                 <div class="flex flex-col mx-2">
                     <span class="text-xl text-gray-800 font-semibold hover:text-green-400"><a
-                            href="{{ route('author', [$post->author->first_name, $post->author->last_name]) }}">{{ $post->author->first_name }}
+                            href="{{ route('admin.guest-admin.show', $post->author) }}">{{ $post->author->first_name }}
                             {{ $post->author->last_name }}</a></span>
                     <span class="text-gray-700 italic">{{ $post->author->title }}</span>
                 </div>
@@ -36,8 +53,8 @@
             </div>
             <div class="w-full my-8 flex items-center text-gray-700">
                 <span><i class="far fa-thumbs-up"></i> {{ $post->likes }}</span> <span class="mx-3"><i
-                        class="far fa-thumbs-down"></i> {{ $post->dislikes }}</span> <span><i class="far fa-comment"></i>
-                    5</span>
+                        class="far fa-thumbs-down"></i>
+                    {{ $post->dislikes }}</span> <span><i class="far fa-comment"></i> 5</span>
             </div>
             <div class="w-full my-8 flex items-center">
                 <span class="text-lg mr-2">More Topics: </span>
@@ -45,7 +62,7 @@
                     @foreach ($categories as $category)
                         <button
                             class="p-1 px-2 border border-green-400 text-green-400 rounded-xl hover:bg-gray-800 hover:text-white text-sm my-2 mr-2"><a
-                                href="{{ route('category-posts', $category->category) }}">{{ $category->category }}</a></button>
+                                href="#">{{ $category->category }}</a></button>
                     @endforeach
                 </div>
             </div>
@@ -119,7 +136,7 @@
                         <div class="w-full md:w-1/2 lg:w-1/4 my-2">
                             <div class="w-11/12 mx-auto">
                                 <div class="h-42 overflow-hidden bg-green-600 mb-2"><a
-                                        href="{{ route('post', $relatedPost->title) }}">
+                                        href="{{ route('admin.post.show', ['which_posts' => $which_posts, 'post' => $relatedPost]) }}">
                                         @if ($relatedPost->file_type == 'Image')
                                             <img src="{{ asset('/storage/files/posts/' . $relatedPost->file) }}"
                                                 alt="" class="object-fit transition scale-110 hover:scale-100">
@@ -133,7 +150,7 @@
                                 <div>
                                     <span class="text-gray-700">{{ $relatedPost->category->category }}</span>
                                     <h4 class="text-lg text-gray-800 hover:text-green-400"><a
-                                            href="{{ route('post', $relatedPost->title) }}">{{ $relatedPost->title }}</a>
+                                            href="{{ route('admin.post.show', ['which_posts' => $which_posts, 'post' => $relatedPost]) }}">{{ $relatedPost->title }}</a>
                                     </h4>
                                     <span class="my-2 text-gray-700">{{ $relatedPost->author->first_name }}
                                         {{ $relatedPost->author->last_name }} -
@@ -146,4 +163,5 @@
             </div>
         </div>
     </section>
+
 @endsection
