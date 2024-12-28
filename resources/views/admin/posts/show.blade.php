@@ -51,11 +51,13 @@
                 <h3 class="mb-2 text-3xl text-gray-800 font-semibold">{{ $post->title }}</h3>
                 <p class="text-lg text-gray-700 text-justify">{{ $post->description }}</p>
             </div>
-            <div class="w-full my-8 flex items-center text-gray-700">
+
+            {{-- <div class="w-full my-8 flex items-center text-gray-700">
                 <span><i class="far fa-thumbs-up"></i> {{ $post->likes }}</span> <span class="mx-3"><i
                         class="far fa-thumbs-down"></i>
                     {{ $post->dislikes }}</span> <span><i class="far fa-comment"></i> 5</span>
-            </div>
+            </div> --}}
+
             <div class="w-full my-8 flex items-center">
                 <span class="text-lg mr-2">More Topics: </span>
                 <div class="flex flex-wrap">
@@ -68,7 +70,7 @@
             </div>
 
             {{-- comments --}}
-            <div class="w-full">
+            {{-- <div class="w-full">
                 <div class="w-full border border-green-400 p-4">
                     <h3 class="font-semibold text-2xl mb-4">Conversations</h3>
 
@@ -125,7 +127,7 @@
                         </form>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             {{-- related --}}
             <div class="w-full mt-8">

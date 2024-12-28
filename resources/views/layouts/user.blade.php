@@ -17,53 +17,21 @@
         <aside class="w-2/12 fixed left-0 top-0 bg-gray-800 border-r-2 border-green-400 h-full">
             <div class="w-2/3 mx-auto text-center my-4 p-4 flex flex-col items-center">
                 <img src="{{ asset('img/user.avif') }}" alt="" class="w-2/3 rounded-full my-2">
-                <h2 class="text-3xl text-green-400">{{ Auth::guard('admin')->user()->first_name }}</h2>
+                <h2 class="text-3xl text-green-400">{{ Auth::guard('web')->user()->first_name }}</h2>
             </div>
 
             <ul class="w-full p-2">
-                <a href="{{ route('admin.dashboard') }}">
-                    <li
-                        class="w-full py-2 px-4 text-xl bg-green-400 text-gray-800 border-l-4 border-green-800 my-3 hover:bg-green-500">
-                        Home</li>
-                </a>
-                <a href="{{ route('admin.profile.show', Auth::guard('admin')->user()) }}">
+
+                <a href="{{ route('user.index') }}">
                     <li
                         class="w-full py-2 px-4 text-xl bg-green-400 text-gray-800 border-l-4 border-green-800 my-3 hover:bg-green-500">
                         Profile</li>
                 </a>
-
-                <a href="{{ route('admin.post.index', ['which_posts' => 'my']) }}">
+                <a href="#">
                     <li
                         class="w-full py-2 px-4 text-xl bg-green-400 text-gray-800 border-l-4 border-green-800 my-3 hover:bg-green-500">
-                        Posts</li>
+                        Change Password</li>
                 </a>
-
-                @if (Auth::guard('admin')->user()->rank === 1)
-                    <li class="w-full group">
-                        <a href="#"
-                            class="py-2 flex items-center justify-between px-4 text-xl bg-green-400 text-gray-800 border-l-4 border-green-800 my-3 hover:bg-green-500"><span>Users</span><i
-                                class="fa fa-caret-down"></i> </a>
-
-                        <ul class="hidden text-white pl-4 group-hover:block">
-                            <a href="{{ route('admin.guest-admin.index') }}">
-                                <li
-                                    class="w-full py-2 px-4 text-xl bg-gray-700 hover:bg-gray-900 text-white border-l-4 border-green-800 my-3">
-                                    Admins</li>
-                            </a>
-                            <a href="{{ route('admin.guest-user.index') }}">
-                                <li
-                                    class="w-full py-2 px-4 text-xl bg-gray-700 hover:bg-gray-900 text-white border-l-4 border-green-800 my-3">
-                                    Users</li>
-                            </a>
-                        </ul>
-                    </li>
-
-                    <a href="{{ route('admin.post-category.index') }}">
-                        <li
-                            class="w-full py-2 px-4 text-xl bg-green-400 text-gray-800 border-l-4 border-green-800 my-3 hover:bg-green-500">
-                            Post Categories</li>
-                    </a>
-                @endif
 
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
@@ -76,7 +44,7 @@
         </aside>
         <div class="w-10/12 float-right">
             <div class="w-full p-4 bg-gray-800">
-                <h1 class="text-2xl text-green-400">Admin Dashboard</h1>
+                <h1 class="text-2xl text-white">Welcome, <span class="text-green-400">{{ Auth::guard('web')->user()->first_name }}</span></h1>
             </div>
 
             @session('message')

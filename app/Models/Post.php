@@ -16,4 +16,8 @@ class Post extends Model
     public function author():BelongsTo {
         return $this->belongsTo(Admin::class, 'admin_id');
     }
+
+    // public function shareableLink() {
+    //     return route('post', $this->slug);
+    // }
 }

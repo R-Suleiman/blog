@@ -26,7 +26,9 @@ Route::prefix('admin')->as('admin.')->middleware('auth.admin')->group(function()
 
 // User Dashboard
 Route::controller(UserDashboardController::class)->middleware('auth')->prefix('user')->group(function() {
-    Route::get('/dashboard', 'index')->name('user.index');
+    Route::get('/profile', 'index')->name('user.index');
+    Route::get('/profile/edit', 'editProfile')->name('user.profile.edit');
+    Route::put('/profile/edit', 'updateProfile')->name('user.profile.update');
 });
 
 // UI
