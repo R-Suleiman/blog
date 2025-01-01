@@ -150,7 +150,7 @@
         <div class="w-fit mx-auto">
             <button
                 class="py-1 px-4 border border-green-400 text-green-400 text-lg rounded-xl hover:bg-gray-800 hover:text-white my-2 mr-2"><a
-                    href="{{ route('latest') }}">See more <i class="fa fa-arrow-right"></i></a></button>
+                    href="{{ route('latest', ['tag' => 'all']) }}">See more <i class="fa fa-arrow-right"></i></a></button>
         </div>
     </section>
 
@@ -192,7 +192,7 @@
         <div class="w-fit mx-auto">
             <button
                 class="py-1 px-4 border border-green-400 text-green-400 text-lg rounded-xl hover:bg-gray-800 hover:text-white my-2 mr-2"><a
-                    href="{{ route('posts') }}">All Posts <i class="fa fa-arrow-right"></i></a></button>
+                    href="{{ route('posts', ['tag' => 'all']) }}">All Posts <i class="fa fa-arrow-right"></i></a></button>
         </div>
     </section>
 

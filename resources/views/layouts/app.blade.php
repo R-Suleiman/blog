@@ -12,10 +12,30 @@
 <body>
     <x-navbar />
 
+    @session('message')
+    <div id="flash-message" class="w-full bg-green-700 py-2 px-4 my-4 mx-2 text-lg text-white">
+        {{ session('message') }}
+    </div>
+@endsession
+
  @yield('content')
 
     <x-footer />
 
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const flashMessage = document.getElementById("flash-message");
+            if (flashMessage) {
+
+                setTimeout(() => {
+                    flashMessage.style.transition = "opacity 0.5s ease";
+                    flashMessage.style.opacity = "0";
+                    setTimeout(() => flashMessage.remove(), 500);
+                }, 5000);
+            }
+        });
+    </script>
  @include('partials.jslinks')
 </body>
 </html>

@@ -22,13 +22,13 @@ class LoginController extends Controller
        // attempt to login as user
        if (Auth::guard('web')->attempt($credentials)) {
        request()->session()->regenerate();
-        return to_route('user.index')->with('message','Welcome User');
+        return to_route('user.index')->with('message','Successfully Logged In');
        };
 
        // attempt to login as admin
        if (Auth::guard('admin')->attempt($credentials)) {
        request()->session()->regenerate();
-        return to_route('admin.dashboard')->with('message','Welcome Admin');
+        return to_route('admin.dashboard')->with('message','Successfully Logged In');
        };
 
 
@@ -44,6 +44,6 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return to_route('login');
+        return to_route('login')->with('message','Successfully Logged Out');
     }
 }

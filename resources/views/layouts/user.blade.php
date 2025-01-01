@@ -27,7 +27,7 @@
                         class="w-full py-2 px-4 text-xl bg-green-400 text-gray-800 border-l-4 border-green-800 my-3 hover:bg-green-500">
                         Profile</li>
                 </a>
-                <a href="#">
+                <a href="{{ route('user.change-password') }}">
                     <li
                         class="w-full py-2 px-4 text-xl bg-green-400 text-gray-800 border-l-4 border-green-800 my-3 hover:bg-green-500">
                         Change Password</li>

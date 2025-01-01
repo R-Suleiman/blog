@@ -29,6 +29,10 @@
                 </div>
             </form>
 
+            <div class="mb-2">
+                <span class="text-green-700 hover:underline"><a href="{{ route('forgot-password') }}">Forgot Password</a></span>
+            </div>
+
             <div class="text-lg">
                 <span class="text-gray-700 mx-2">Don't have an account?</span> <span class="text-green-700 hover:underline"><a href="{{ route('register.create') }}">Register</a></span>
             </div>

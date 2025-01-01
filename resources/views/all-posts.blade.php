@@ -18,15 +18,18 @@
         <div class="flex items-center">
             <span class="text-lg mr-2">Filter: </span>
             <div class="flex flex-wrap">
-                <button
-                    class="p-1 px-2 border border-green-400 text-green-400 rounded-xl hover:bg-gray-800 hover:text-white text-sm my-2 mr-2">
-                    <i class="fa fa-list"></i> All</button>
-                <button
-                    class="p-1 px-2 border border-green-400 text-green-400 rounded-xl hover:bg-gray-800 hover:text-white text-sm my-2 mr-2">Programming</button>
-                <button
-                    class="p-1 px-2 border border-green-400 text-green-400 rounded-xl hover:bg-gray-800 hover:text-white text-sm my-2 mr-2">Security</button>
-                <button
-                    class="p-1 px-2 border border-green-400 text-green-400 rounded-xl hover:bg-gray-800 hover:text-white text-sm my-2 mr-2">AI</button>
+                <a href="{{ route('posts', ['tag' => 'all']) }}">
+                    <button
+                        class="{{ $tag == 'all' ? 'bg-gray-800 text-white' : 'text-green-400  hover:bg-gray-800 hover:text-white' }} p-1 px-2 my-2 mr-2 border border-green-400 text-sm rounded-xl">
+                        <i class="fa fa-list"></i> All</button>
+                </a>
+
+                @foreach ($categories as $category)
+                    <a href="{{ route('posts', $category->category) }}">
+                        <button
+                            class="{{ $category->category == $tag ? 'bg-gray-800 text-white' : 'text-green-400  hover:bg-gray-800 hover:text-white' }} p-1 px-2 my-2 mr-2 border border-green-400 text-sm rounded-xl">{{ $category->category }}</button>
+                    </a>
+                @endforeach
             </div>
         </div>
 

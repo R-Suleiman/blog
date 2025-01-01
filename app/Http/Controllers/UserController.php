@@ -41,10 +41,18 @@ class UserController extends Controller
         return view("contact");
     }
 
-    public function latest()
+    public function latest($tag)
     {
-        $latestPosts = Post::orderBy("created_at","desc")->take(8)->get();
-        return view("latest", ["latestPosts"=> $latestPosts]);
+        if($tag == 'all') {
+            $latestPosts = Post::orderBy("created_at","desc")->take(8)->get();
+        } else {
+            $categoryId = PostCategory::where('category', $tag)->first()->id;
+            $latestPosts = Post::where('category_id', $categoryId)->take(8)->get();
+        }
+
+        $categories = PostCategory::all();
+
+        return view("latest", ["latestPosts"=> $latestPosts, 'categories' => $categories, 'tag' => $tag]);
     }
 
     public function post($post)
@@ -66,11 +74,18 @@ class UserController extends Controller
         return view("category-posts", ["categoryPosts" => $categoryPosts, 'category' => $category, 'otherCategories' => $otherCategories]);
     }
 
-    public function posts()
+    public function posts($tag)
     {
-        $posta = Post::orderBy("created_at","desc")->paginate(12);
+        if($tag == 'all') {
+            $posts = Post::orderBy("created_at","desc")->paginate(12);
+        } else {
+            $categoryId = PostCategory::where('category', $tag)->first()->id;
+            $posts = Post::where('category_id', $categoryId)->paginate(12);
+        }
 
-        return view("all-posts", ["posts"=> $posta]);
+        $categories = PostCategory::all();
+
+        return view("all-posts", ["posts"=> $posts, 'categories' => $categories, 'tag' => $tag]);
     }
 
     public function searchPage() {

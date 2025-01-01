@@ -17,7 +17,7 @@
                     <x-nav-link href="{{ route('index') }}" :active="request()->is('/')">
                         Home
                     </x-nav-link>
-                    <x-nav-link href="{{ route('latest') }}" :active="request()->is('latest')">
+                    <x-nav-link href="{{ route('latest', ['tag' => 'all']) }}" :active="request()->is('latest')">
                         Latest
                     </x-nav-link>
                     @foreach ($categories->take(5) as $category)
