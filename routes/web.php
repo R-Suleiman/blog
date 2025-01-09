@@ -1,22 +1,18 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AdminProfileController;
-use App\Http\Controllers\ChangePasswordController;
-use App\Http\Controllers\ForgotPasswordController;
-use App\Http\Controllers\GuestAdminsController;
-use App\Http\Controllers\GuestUsersController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\PostCategoriesController;
-use App\Http\Controllers\PostsController;
-use App\Http\Controllers\RegisterUserController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\UserDashboardController;
+use App\Http\Controllers\RootAdmin\AdminController;
+use App\Http\Controllers\Admins\AdminProfileController;
+use App\Http\Controllers\Admins\ChangePasswordController;
+use App\Http\Controllers\AuthController\ForgotPasswordController;
+use App\Http\Controllers\RootAdmin\GuestAdminsController;
+use App\Http\Controllers\RootAdmin\GuestUsersController;
+use App\Http\Controllers\AuthController\LoginController;
+use App\Http\Controllers\RootAdmin\PostCategoriesController;
+use App\Http\Controllers\Admins\PostsController;
+use App\Http\Controllers\AuthController\RegisterUserController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\User\UserDashboardController;
 use Illuminate\Support\Facades\Route;
-
-// Route::get('/test', function() {
-//     return view('mail.forgot-password', ['token' => '123456']);
-// });
 
 // Admin Controller
 Route::prefix('admin')->as('admin.')->middleware('auth.admin')->group(function() {
@@ -41,8 +37,8 @@ Route::controller(UserDashboardController::class)->middleware('auth')->prefix('u
     Route::post('/change-password', 'updatePassword')->name('user.update-password');
 });
 
-// UI
-Route::controller( UserController::class)->group(function() {
+// HOME UI
+Route::controller( HomeController::class)->group(function() {
     Route::get('/', 'index')->name('index');
     Route::get('/latest/{tag}', 'latest')->name('latest');
     Route::get('/posts/{tag}', 'posts')->name('posts');
@@ -52,6 +48,16 @@ Route::controller( UserController::class)->group(function() {
     Route::get('/posts/{post}', 'post')->name('post');
     Route::get('/authors/{first_name} {last_name}', 'author')->name('author');
     Route::get('/contact-us', 'contact')->name('contact');
+
+    //forum
+    Route::get('/forum', 'forum')->name('forum');
+    Route::middleware('isUserOrAdmin')->group(function() {
+        Route::get('/forum/topics', 'forumTopics')->name('forum-topics');
+        Route::get('/forum/topics/topic', 'forumTopic')->name('forum-topic');
+        Route::get('/forum/topics/category-topics', 'forumCategoryTopics')->name('forum-category-topics');
+        Route::get('/forum/search/results', 'forumSearchResult')->name('forum-search-result');
+    });
+
 });
 
 // Auth

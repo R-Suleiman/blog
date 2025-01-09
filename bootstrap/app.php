@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\AdminAuthMiddleware;
 use App\Http\Middleware\IsRootAdminMiddleware;
+use App\Http\Middleware\AdminOrUserAuthMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -16,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'auth.admin' => AdminAuthMiddleware::class,
             'isRootAdmin' => IsRootAdminMiddleware::class,
+            'isUserOrAdmin' => AdminOrUserAuthMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

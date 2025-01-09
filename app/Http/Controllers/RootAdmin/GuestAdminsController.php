@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\RootAdmin;
 
 use App\Models\Admin;
 use App\Http\Controllers\Controller;

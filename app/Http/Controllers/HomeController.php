@@ -8,7 +8,7 @@ use App\Models\Post;
 use App\Models\PostCategory;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class HomeController extends Controller
 {
     public function index()
     {
@@ -110,5 +110,25 @@ class UserController extends Controller
         $author = Admin::with('posts')->where('first_name', $first_name)->where('last_name', $last_name)->first();
 
         return view("author", ["author"=> $author]);
+    }
+
+    public function forum() {
+        return view('forum.index');
+    }
+
+    public function forumTopics() {
+        return view('forum.topics');
+    }
+
+    public function forumCategoryTopics() {
+        return view('forum.category-topics');
+    }
+
+    public function forumSearchResult() {
+        return view('forum.search-results');
+    }
+
+    public function forumTopic() {
+        return view('forum.topic');
     }
 }

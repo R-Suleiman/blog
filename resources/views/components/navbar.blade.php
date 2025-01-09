@@ -25,7 +25,7 @@
                             {{ $category->category }}
                         </x-nav-link>
                     @endforeach
-                    <x-nav-link href="#">
+                    <x-nav-link href="{{ route('forum') }}">
                         Forum
                     </x-nav-link>
                     <x-nav-link href="{{ route('contact') }}" :active="request()->is('contact-us')">

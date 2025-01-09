@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AuthController;
 
 use App\Http\Controllers\Controller;
 use App\Mail\ForgotPassword;
@@ -44,13 +44,6 @@ class ForgotPasswordController extends Controller
         Mail::to($request->email)->send(
             new ForgotPassword($token, $user)
         );
-
-        // Send an Email (TO BE VERIFIED!!!!!)
-        // Mail::send('mail.forgot-password', ['token' => $token], function($message) use ($request) {
-        //     $message->to($request->email);
-        //     $message->subject('Reset Password');
-        // });
-
 
         return to_route('forgot-password')->with('success', 'A password reset link has been sent to your email');
 
