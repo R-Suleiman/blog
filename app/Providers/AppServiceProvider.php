@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\PostCategory;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 
@@ -21,9 +21,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // return posts categories
-        $categories = PostCategory::all();
-        View::share("categories", $categories);
+        // Ensure the database is accessed only when it is available
+        if(app()->runningInConsole()) {
+            return;
+        }
+
+        if(Schema::hasTable('post_categories')) {
+            $categories = \App\Models\PostCategory::all();
+            View::share("categories", $categories);
+        }
 
         // return the current signed in user
         // view::composer("*", function ($view) {
