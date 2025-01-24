@@ -18,4 +18,13 @@ use HasFactory, Notifiable;
     public function posts():HasMany {
         return $this->hasMany(Post::class);
     }
+
+    public function topics() {
+        return $this->hasMany(Topic::class);
+    }
+
+    public function comments() {
+        return $this->morphMany(TopicComments::class, 'commentable');
+    }
+
 }

@@ -30,7 +30,7 @@
                         @csrf
                         @method('DELETE')
                         <button
-                class="py-1 px-4 border border-red-600 text-red-600 text-lg rounded-xl hover:bg-red-800 hover:text-white my-2 mr-2" onclick="return confirm('Are you sure you want to remove this Admin? This will remove all the posts of this admin too.')">Remove Admin</button>
+                class="delete-btn py-1 px-4 border border-red-600 text-red-600 text-lg rounded-xl hover:bg-red-800 hover:text-white my-2 mr-2">Remove Admin</button>
                     </form>
     </div>
 

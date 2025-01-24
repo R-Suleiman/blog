@@ -54,6 +54,7 @@ Route::controller( HomeController::class)->group(function() {
     Route::middleware('isUserOrAdmin')->group(function() {
         Route::get('/forum/topics', 'forumTopics')->name('forum-topics');
         Route::get('/forum/topics/topic', 'forumTopic')->name('forum-topic');
+        Route::post('/comments', 'storeComments')->name('store-comments');
         Route::get('/forum/topics/category-topics', 'forumCategoryTopics')->name('forum-category-topics');
         Route::get('/forum/search/results', 'forumSearchResult')->name('forum-search-result');
     });

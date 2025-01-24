@@ -22,6 +22,11 @@
 
             <ul class="w-full p-2">
 
+                <a href="{{ route('index') }}">
+                    <li
+                        class="w-full py-2 px-4 text-xl bg-green-400 text-gray-800 border-l-4 border-green-800 my-3 hover:bg-green-500">
+                        Home</li>
+                </a>
                 <a href="{{ route('user.index') }}">
                     <li
                         class="w-full py-2 px-4 text-xl bg-green-400 text-gray-800 border-l-4 border-green-800 my-3 hover:bg-green-500">

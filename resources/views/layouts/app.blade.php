@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title') | {{ config('app.name') }}</title>
-    @vite('resources/css/app.css')
+    @vite(['resources/js/app.js', 'resources/css/app.css'])
     @include('partials.links')
 </head>
 <body>
@@ -37,5 +37,7 @@
         });
     </script>
  @include('partials.jslinks')
+
+ {{-- @livewireScripts --}}
 </body>
 </html>

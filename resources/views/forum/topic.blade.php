@@ -53,65 +53,33 @@
 
         </div>
         {{-- comments --}}
-       <div class="w-full">
-           <div class="w-full border border-green-400 p-4">
-               <h3 class="font-semibold text-2xl mb-4">Conversations</h3>
+        <div class="w-full">
+            <div class="w-full border border-green-400 p-4">
+                <h3 class="font-semibold text-2xl mb-4">Conversations</h3>
 
-               <div class="w-full">
-                   <div class="w-full flex my-2">
-                       <div class="w-32 md:w-24 rounded-full border border-green-400 mr-2 h-fit">
-                           <a href="#"><img src="{{ asset('img/user.avif') }}" alt="author photo"
-                                   class="object-center w-full rounded-full"></a>
-                       </div>
-                       <div class="flex flex-col">
-                           <div class="w-full flex flex-col">
-                               <span class="mr-2 text-gray-800 font-semibold">Jane Doe</span>
-                               <span class="text-sm text-gray-600">13:00 - 12/12/2023</span>
-                           </div>
-                           <p class="my-2 text-gray-700 text-justify">Lorem ipsum dolor sit amet consectetur
-                               adipisicing elit. Labore laboriosam reprehenderit saepe asperiores deleniti, maxime id.
-                               Quas nostrum velit expedita enim optio non, ullam eius, repellat, asperiores dolor
-                               consequatur fuga!</p>
-                           <div class="text-gray-700 mb-3">
-                               <span>Reply</span>
-                               <span class="mx-2"><i class="far fa-heart"></i> 12</span>
-                           </div>
-                       </div>
-                   </div>
-                   <div class="w-full flex my-2">
-                       <div class="w-32 md:w-24 rounded-full border border-green-400 mr-2 h-fit">
-                           <a href="#"><img src="{{ asset('img/user.avif') }}" alt="author photo"
-                                   class="object-center w-full rounded-full"></a>
-                       </div>
-                       <div class="flex flex-col">
-                           <div class="w-full flex flex-col">
-                               <span class="mr-2 text-gray-800 font-semibold">Jane Doe</span>
-                               <span class="text-sm text-gray-600">13:00 - 12/12/2023</span>
-                           </div>
-                           <p class="my-2 text-gray-700 text-justify">Lorem ipsum dolor sit amet consectetur
-                               adipisicing elit. Labore laboriosam reprehenderit saepe asperiores deleniti, maxime id.
-                               Quas nostrum velit expedita enim optio non, ullam eius, repellat, asperiores dolor
-                               consequatur fuga!</p>
-                           <div class="text-gray-700 mb-3">
-                            <span>Reply</span>
-                            <span class="mx-2"><i class="far fa-heart"></i> 12</span>
-                           </div>
-                       </div>
-                   </div>
-               </div>
+                <div class="w-full" id="comments-section">
+                    @foreach ($comments as $comment)
+                    <x-comment :comment="$comment" />
+                    @endforeach
+                </div>
 
-               <div class="w-full mt-8">
-                   <form action="#">
-                       <div class="w-full p-2">
-                           <textarea name="" id="" cols="30" rows="5" placeholder="Add a comment"
-                               class="w-full border border-green-400 text-lg p-2 outline-none"></textarea>
-                           <button class="p-2 text-gray-800 bg-green-400 text-lg my-2">Comment</button>
-                       </div>
-                   </form>
-               </div>
-           </div>
-       </div>
+                <div class="w-full mt-8">
+                    <form id="comment-form">
+                        <div class="w-full p-2">
+                            <span id="reply-indicator" class="my-1 text-green-600 font-semibold"></span>
+                            <input type="hidden" name="topic_id" value="1">
+                            <textarea name="comment" id="comment-input" cols="30" rows="5" placeholder="Add a comment"
+                                class="w-full border border-green-400 text-lg p-2 outline-none"></textarea>
+                            <button class="p-2 text-gray-800 bg-green-400 hover:bg-green-700 hover:text-white text-lg my-2" type="submit">Comment</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        {{-- @livewire('comment-component', ['topic_id' => 1]) --}}
 
     </section>
 
+    <script src="../../js/forum.js" type="module"></script>
 @endsection

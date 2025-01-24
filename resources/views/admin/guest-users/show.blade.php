@@ -25,7 +25,7 @@
                         @csrf
                         @method('DELETE')
                         <button
-                class="py-1 px-4 border border-red-600 text-red-600 text-lg rounded-xl hover:bg-red-800 hover:text-white my-2 mr-2" onclick="return confirm('Are you sure you want to remove this User?')">Remove User</button>
+                class="delete-btn py-1 px-4 border border-red-600 text-red-600 text-lg rounded-xl hover:bg-red-800 hover:text-white my-2 mr-2">Remove User</button>
                     </form>
     </div>
 </section>

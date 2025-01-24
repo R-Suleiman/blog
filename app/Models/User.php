@@ -21,6 +21,7 @@ class User extends Authenticatable
         'first_name',
         'last_name',
         'email',
+        'photo',
         'password',
     ];
 
@@ -46,4 +47,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function comments() {
+        return $this->morphMany(TopicComments::class, 'commentable');
+    }
+
 }

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CommentEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Post;
 use App\Models\PostCategory;
+use App\Models\TopicComments;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -129,6 +131,21 @@ class HomeController extends Controller
     }
 
     public function forumTopic() {
-        return view('forum.topic');
+        $comments = TopicComments::where('topic_id', 1)->whereNull('reply_to')->with('replies')->with('commentable')->withCOunt('replies')->get();
+
+        return view('forum.topic', ['comments' => $comments]);
+    }
+
+    public function storeComments(Request $request) {
+        $validated = $request->validate([
+            'comment' => 'required|string',
+            'topic_id' => 'required|integer',
+            'reply_to' => 'nullable|exists:topic_comments,id',
+        ]);
+
+        // Broadcast the comment
+        CommentEvent::dispatch($request->topic_id, $request->comment, $request->reply_to);
+
+        return response()->json(['message' => 'Comment broadcasted successfully.']);
     }
 }
