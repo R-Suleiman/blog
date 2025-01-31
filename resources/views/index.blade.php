@@ -6,7 +6,7 @@
     <section class="relative w-full bg-gray-700 bg-center bg-cover bg-no-repeat h-60"
         style="background-image: url('img/tech1.png')">
         <div class="overlay w-full p-12">
-            <h2 class="text-3xl md:text-5xl text-white my-2 mr-2">Welcome to <span class="text-green-400">Blog</span></h2>
+            <h2 class="text-3xl md:text-5xl text-white my-2 mr-2">Welcome to <span class="text-green-400">Mwanateknolojia</span></h2>
             <h3 class="text-white text-lg md:text-2xl my-2 mr-2">Insights into the Latest Tech Trends</h3>
             <h3 class="text-white text-md md:text-xl my-2 mr-2">Stay updated on various tech topics; <span
                     class="text-green-400">AI</span>, <span class="text-green-400">Programming</span>, <span
@@ -156,7 +156,7 @@
 
     {{-- explore more --}}
     <section class="w-11/12 mx-auto my-8">
-        <h3 class="my-4 text-3xl text-center text-green-600 px-2">More on Blog</h3>
+        <h3 class="my-4 text-3xl text-center text-green-600 px-2">More on Mwanateknolojia</h3>
 
         <div class="w-full p-2 my-4 flex flex-col md:flex-row flex-wrap">
             @if ($otherPosts->count() > 0)
@@ -199,10 +199,20 @@
     {{-- Newsletter --}}
     <section class="w-full p-12 bg-gray-700">
         <h3 class="text-4xl text-green-400 text-center">Subscibe to our Newsletter</h3>
-        <p class="text-lg text-white text-center my-2">Stay updated with the latest news and events as they happen</p>
-        <div class="w-fit mx-auto my-4">
-            <button
-                class="w-max bg-green-400 py-1 px-4 rounded-xl text-gray-700 text-lg font-semibold hover:text-white hover:bg-green-700">Subscribe</button>
+        <p class="text-lg text-white text-center my-2">Stay updated with the latest news and posts as they are posted</p>
+        <div class="w-full md:w-2/5 mx-auto my-4">
+            @if (session('email-success'))
+                <div class="flash-message mt-4 text-green-500">{{ session('email-success') }}</div>
+            @endif
+
+            <form action="{{ route('newsletter.subscribe') }}" method="POST">
+                @csrf
+                <div class="flex flex-col items-center">
+                    <input type="email" name="email" placeholder="email" class="w-full border-2 border-green-400 bg-gray-700 text-white text-lg p-2 outline-none my-2" required>
+                    <button type="submit"
+                        class="w-max bg-green-400 py-1 px-4 rounded-xl text-gray-700 text-lg font-semibold hover:text-white hover:bg-green-700">Subscribe</button>
+                </div>
+            </form>
         </div>
     </section>
 @endsection

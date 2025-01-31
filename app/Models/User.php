@@ -23,6 +23,7 @@ class User extends Authenticatable
         'email',
         'photo',
         'password',
+        'email_verified_at'
     ];
 
     /**
@@ -50,6 +51,10 @@ class User extends Authenticatable
 
     public function comments() {
         return $this->morphMany(TopicComments::class, 'commentable');
+    }
+
+    public function topicLikes() {
+        return $this->morphMany(TopicLike::class, 'likable');
     }
 
 }

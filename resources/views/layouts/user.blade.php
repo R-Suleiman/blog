@@ -53,7 +53,7 @@
             </div>
 
             @session('message')
-                <div id="flash-message" class="w-full bg-green-700 py-2 px-4 my-4 mx-2 text-lg text-white">
+                <div class="flash-message w-full bg-green-700 py-2 px-4 my-4 mx-2 text-lg text-white">
                     {{ session('message') }}
                 </div>
             @endsession
@@ -66,15 +66,17 @@
     <script>
 
         document.addEventListener("DOMContentLoaded", function () {
-            const flashMessage = document.getElementById("flash-message");
-            if (flashMessage) {
-
-                setTimeout(() => {
-                    flashMessage.style.transition = "opacity 0.5s ease";
-                    flashMessage.style.opacity = "0";
-                    setTimeout(() => flashMessage.remove(), 500);
-                }, 5000);
-            }
+            const flashMessage = document.querySelectorAll("flash-message");
+            flashMessage.forEach((message) => {
+                if (message) {
+    
+                    setTimeout(() => {
+                        message.style.transition = "opacity 0.5s ease";
+                        message.style.opacity = "0";
+                        setTimeout(() => message.remove(), 500);
+                    }, 5000);
+                }
+            })
         });
     </script>
 </body>

@@ -27,4 +27,8 @@ use HasFactory, Notifiable;
         return $this->morphMany(TopicComments::class, 'commentable');
     }
 
+    public function topicLikes() {
+        return $this->morphMany(TopicLike::class, 'likable');
+    }
+
 }

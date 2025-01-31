@@ -2,7 +2,7 @@
     {{-- <div class="w-full flex items-center"> --}}
     <div class="w-11/12 mx-auto p-2 flex flex-col lg:flex-row lg:items-center">
         <div class="w-full lg:w-2/12 flex items-center justify-between">
-            <h1 class="text-green-400 text-2xl"><a href="{{ route('index') }}">Blog</a></h1>
+            <h1 class="text-green-400 text-2xl"><a href="{{ route('index') }}">Mwanateknolojia</a></h1>
             <div class="open-nav text-green-400 text-xl w-6 cursor-pointer block lg:hidden ml-auto">
                 <i class="fa fa-align-justify"></i>
             </div>

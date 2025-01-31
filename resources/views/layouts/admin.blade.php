@@ -14,7 +14,7 @@
 <body>
 
     <section class="w-full relative">
-        <aside class="w-2/12 fixed left-0 top-0 bg-gray-800 border-r-2 border-green-400 h-full">
+        <aside class="w-2/12 fixed left-0 top-0 bg-gray-800 border-r-2 border-green-400 h-full overflow-y-auto">
             <div class="w-2/3 mx-auto text-center my-4 p-4 flex flex-col items-center">
                 <img src="{{ asset('img/user.avif') }}" alt="" class="w-2/3 rounded-full my-2">
                 <h2 class="text-3xl text-green-400">{{ Auth::guard('admin')->user()->first_name }}</h2>
@@ -36,6 +36,12 @@
                     <li
                         class="w-full py-2 px-4 text-xl bg-green-400 text-gray-800 border-l-4 border-green-800 my-3 hover:bg-green-500">
                         Posts</li>
+                </a>
+
+                <a href="{{ route('admin.topic.index', ['which_topics' => 'my']) }}">
+                    <li
+                        class="w-full py-2 px-4 text-xl bg-green-400 text-gray-800 border-l-4 border-green-800 my-3 hover:bg-green-500">
+                        Forum Topics</li>
                 </a>
 
                 @if (Auth::guard('admin')->user()->rank === 1)
@@ -62,6 +68,12 @@
                         <li
                             class="w-full py-2 px-4 text-xl bg-green-400 text-gray-800 border-l-4 border-green-800 my-3 hover:bg-green-500">
                             Post Categories</li>
+                    </a>
+
+                    <a href="{{ route('admin.inquiry.index') }}">
+                        <li
+                            class="w-full py-2 px-4 text-xl bg-green-400 text-gray-800 border-l-4 border-green-800 my-3 hover:bg-green-500">
+                            Inquiries</li>
                     </a>
                 @endif
 
@@ -95,7 +107,7 @@
         </div>
     </section>
 
-    <script src="../../js/admin.js"></script>
+    <script src="{{ asset('js/admin.js') }}"></script>
 </body>
 
 </html>

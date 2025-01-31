@@ -7,7 +7,7 @@
         <div class="w-full mx-auto border border-green-400 my-8 p-2 md:p-4 flex flex-col items-center">
             <h3 class="text-3xl text-green-400 font-semibold mb-4">Create new Post</h3>
 
-            <form action="{{ route('admin.post.store', ['which_posts' => $which_posts]) }}" method="POST" enctype="multipart/form-data"
+            <form action="{{ route('admin.post.store') }}" method="POST" enctype="multipart/form-data"
                 class="w-full p-2 my-4">
                 @csrf
 

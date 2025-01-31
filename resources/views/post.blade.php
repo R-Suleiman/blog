@@ -6,7 +6,7 @@
         <div class="w-11/12 md:w-9/12 mx-auto my-8 md:p-8">
             <div class="w-full flex items-center justify-between">
                 <span class="bg-green-400 text-gray-800 py-1 px-4 text-lg">{{ $post->category->category }}</span>
-                <span class="text-gray-500">Posted on:
+                <span class="text-gray-500">Posted:
                     {{ $post->created_at->diffInDays(now()) > 7 ? $post->created_at->format('F j, Y') : $post->created_at->diffForHumans() }}</span>
             </div>
             <div class="w-full overflow-hidden my-2">

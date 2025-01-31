@@ -10,7 +10,7 @@
                     alt="author photo" class="object-center w-full rounded-full"></a>
         @endif
     </div>
-    <div class="flex flex-col">
+    <div class="comment-content flex flex-col">
         <div class="w-full flex items-center">
             <span class="text-gray-800 font-semibold">{{ $comment->commentable->first_name }}
                 {{ $comment->commentable->last_name }}</span>
@@ -19,11 +19,8 @@
                 class="text-sm text-gray-600">{{ $comment->created_at->diffInDays(now()) > 7 ? $comment->created_at->format('F j, Y') : $comment->created_at->diffForHumans() }}</span>
         </div>
         <p class="my-1 text-gray-700 text-justify">{!! $comment->comment !!}</p>
-        <div class="text-gray-700">
-            <span><i class="far fa-heart"></i> {{ $comment->likes }}</span>
-            <span class="mx-2"><i class="fa fa-reply"></i> {{ $comment->replies_count }}</span>
-            <span class="reply-link cursor-pointer hover:text-gray-950" data-id="{{ $comment->id }}" data-author="{{ $comment->commentable->first_name }}">Reply</span>
-        </div>
+
+        <x-comment-reactions :comment="$comment" />
 
         {{-- replies --}}
         @if ($comment->replies && $comment->replies->isNotEmpty())

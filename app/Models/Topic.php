@@ -28,7 +28,11 @@ class Topic extends Model
 
     public function comments()
     {
-        return $this->morphMany(TopicComments::class, 'commentable');
+        return $this->hasMany(TopicComments::class);
+    }
+
+    public function likesClass() {
+        return $this->hasMany(TopicLike::class);
     }
 
 }

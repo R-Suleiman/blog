@@ -60,5 +60,36 @@
         @endif
 
         </div>
+
+        {{-- Topics Hosted --}}
+        <div class="w-11/12 md:w-10/12 mx-auto md:p-2 my-8">
+            <h5 class="my-2 text-2xl text-gray-700">Topics Hosted</h5>
+
+            @if ($author->topics->count() > 0)
+                @foreach ($author->topics as $topic)
+                <div class="w-full bg-green-50 p-2 my-2">
+                            <span class="text-sm"> {{ $topic->created_at->diffInDays(now()) > 7 ? $topic->created_at->format('F j, Y') : $topic->created_at->diffForHumans() }}</span>
+
+                    <div class="my-2 px-2">
+                        <span class="text-sm my-2 text-green-700">{{ $topic->category->category }}</span>
+                        <h4 class="text-xl font-semibold hover:text-green-600"><a href="{{ route('forum-topic', $topic->id) }}">{{ $topic->title }}</a>
+                        </h4>
+                    </div>
+
+                    <div class="w-full flex items-center text-gray-700 px-2 mt-3">
+                        <span><i class="far fa-heart"></i> {{ $topic->likes }}</span>
+                        <span class="mx-3"><i class="far fa-comment"></i>
+                            5</span>
+                        <span><i class="far fa-eye"></i>
+                            5</span>
+                    </div>
+                </div>
+                @endforeach
+            @else
+                <div>
+                    <p class="p-2 text-lg bg-green-300 border-l-4 border-green-600"> No Topics Hosted</p>
+                </div>
+            @endif
+        </div>
     </section>
 @endsection

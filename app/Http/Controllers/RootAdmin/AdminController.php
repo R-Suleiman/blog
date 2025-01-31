@@ -4,6 +4,7 @@ namespace App\Http\Controllers\RootAdmin;
 
 use App\Models\Admin;
 use App\Http\Controllers\Controller;
+use App\Models\inquiry;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,8 +19,9 @@ class AdminController extends Controller
         $OtherPostsCount = Post::where('admin_id', '!=', Auth::guard('admin')->user()->id)->count();
         $guestAdminsCount = Admin::where('id','!=', Auth::guard('admin')->user()->id)->count();
         $usersCount = User::all()->count();
+        $inquiriesCount = inquiry::all()->count();
 
-        return view("admin.index", ["myPosts"=> $myPostsCount,"otherPosts"=> $OtherPostsCount, "users"=> $usersCount, 'guestAdmins' => $guestAdminsCount]);
+        return view("admin.index", ["myPosts"=> $myPostsCount,"otherPosts"=> $OtherPostsCount, "users"=> $usersCount, 'guestAdmins' => $guestAdminsCount, 'inquiries' => $inquiriesCount]);
     }
 
 }

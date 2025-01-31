@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\AdminAuthMiddleware;
+use App\Http\Middleware\EnsureEmailIsVerified;
 use App\Http\Middleware\IsRootAdminMiddleware;
 use App\Http\Middleware\AdminOrUserAuthMiddleware;
 use Illuminate\Foundation\Application;
@@ -19,6 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'auth.admin' => AdminAuthMiddleware::class,
             'isRootAdmin' => IsRootAdminMiddleware::class,
             'isUserOrAdmin' => AdminOrUserAuthMiddleware::class,
+            'verified' => EnsureEmailIsVerified::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

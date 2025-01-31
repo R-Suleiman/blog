@@ -21,6 +21,8 @@
             </form>
         </div>
 
+        <p class="text-lg">{{ $searchCount }} Results Found!</p>
+
         @if (isset($posts))
 
         @if ($posts->count() > 0)

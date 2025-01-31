@@ -3,15 +3,14 @@
 @section('content')
 
     <section class="w-11/12 mx-auto p-2">
-        <h3 class="m-4 text-3xl text-gray-700">Profile Information</h3>
+        <h3 class="m-4 text-3xl text-gray-700">Posts Details</h3>
         <div class="w-full mx-auto border border-green-400 my-8 p-2 md:p-4 flex flex-col items-center">
-            <h3 class="text-3xl text-green-400 font-semibold mb-4">Update Profile Details</h3>
+            <h3 class="text-3xl text-green-400 font-semibold mb-4">Update Post Details</h3>
 
-            <form action="{{ route('admin.post.update', ['which_posts' => $which_posts, 'post' => $post]) }}" method="POST" enctype="multipart/form-data"
+            <form action="{{ route('admin.post.update', ['post' => $post]) }}" method="POST" enctype="multipart/form-data"
             class="w-full p-2 my-4">
             @csrf
             @method('PUT')
-
                 <div class="w-full p-2">
                     <label for="title" class="text-xl mb-2 text-gray-700">Post title:</label>
                     <input type="text" name="title" value="{{ $post->title }}"
@@ -25,7 +24,7 @@
                     <label for="category" class="text-xl mb-2 text-gray-700">Category:</label>
                     <select name="category" class="w-full border border-green-400 text-lg p-2 outline-none">
                         @foreach ($categories as $category)
-                        <option value="{{ $post->category->category }} {{ $post->category->category == $category->category ? 'selected' : '' }}">{{ $category->category }}</option>
+                        <option value="{{ $category->category }}" {{ $post->category->category === $category->category ? 'selected' : '' }}>{{ $category->category }}</option>
                         @endforeach
                     </select>
 

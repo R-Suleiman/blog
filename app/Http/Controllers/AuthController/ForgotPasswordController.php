@@ -32,7 +32,7 @@ class ForgotPasswordController extends Controller
                 return redirect()->back()->with('error', 'Email not Registered');
             }
         }
-
+ 
         $token = Str::random(64);
 
         DB::table('password_reset_tokens')->insert([

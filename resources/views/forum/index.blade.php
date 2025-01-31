@@ -11,7 +11,7 @@
     </section>
 
     <section class="w-11/12 mx-auto my-4 md:p-8">
-        <h4 class="text-xl">Welcome to <span class="text-green-600 font-semibold">Blog</span>'s forum.</h4>
+        <h4 class="text-xl">Welcome to <span class="text-green-600 font-semibold">Mwanateknolojia</span>'s forum.</h4>
         <p class="text-lg my-4 text-justify">
             This is a platform made for users to exchange their ideas on various topics.
             Different topics will be hosted by the creators, and users will be able to comment and discuss their ideas.

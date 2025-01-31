@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,35 +10,44 @@
     @vite(['resources/js/app.js', 'resources/css/app.css'])
     @include('partials.links')
 </head>
+
 <body>
     <x-navbar />
 
     @session('message')
-    <div id="flash-message" class="w-full bg-green-700 py-2 px-4 my-4 mx-2 text-lg text-white">
-        {{ session('message') }}
-    </div>
-@endsession
+        <div class="flash-message w-full bg-green-700 py-2 px-4 my-4 mx-2 text-lg text-white">
+            {{ session('message') }}
+        </div>
+    @endsession
 
- @yield('content')
+    @session('error')
+        <div class="flash-message w-full bg-red-700 py-2 px-4 my-4 mx-2 text-lg text-white">
+            {{ session('error') }}
+        </div>
+    @endsession
+
+    @yield('content')
 
     <x-footer />
 
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const flashMessage = document.querySelectorAll(".flash-message");
+            flashMessage.forEach((message) => {
+                if (message) {
 
-        document.addEventListener("DOMContentLoaded", function () {
-            const flashMessage = document.getElementById("flash-message");
-            if (flashMessage) {
-
-                setTimeout(() => {
-                    flashMessage.style.transition = "opacity 0.5s ease";
-                    flashMessage.style.opacity = "0";
-                    setTimeout(() => flashMessage.remove(), 500);
-                }, 5000);
-            }
+                    setTimeout(() => {
+                        message.style.transition = "opacity 0.5s ease";
+                        message.style.opacity = "0";
+                        setTimeout(() => message.remove(), 500);
+                    }, 5000);
+                }
+            });
         });
     </script>
- @include('partials.jslinks')
+    @include('partials.jslinks')
 
- {{-- @livewireScripts --}}
+    {{-- @livewireScripts --}}
 </body>
+
 </html>

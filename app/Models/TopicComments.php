@@ -11,7 +11,6 @@ class TopicComments extends Model
         'user_id',
         'comment',
         'likes',
-        'dislikes',
         'reply_to',
         'commentable_id',
         'commentable_type',
@@ -29,5 +28,9 @@ class TopicComments extends Model
 
     public function replies() {
         return $this->hasMany(TopicComments::class, 'reply_to')->with('replies');
+    }
+
+    public function likesClass() {
+        return $this->hasMany(CommentLike::class, 'id');
     }
 }

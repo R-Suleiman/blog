@@ -8,9 +8,9 @@
             <div class="w-fit mb-4 ml-auto flex flex-col md:flex-row items-center">
                 <button
                     class="py-1 px-4 border border-green-400 text-green-400 text-lg rounded-xl hover:bg-gray-800 hover:text-white my-2 mr-2"><a
-                        href="{{ route('admin.post.edit', ['which_posts' => $which_posts, 'post' => $post]) }}">Edit Post</a></button>
+                        href="{{ route('admin.post.edit', ['post' => $post]) }}">Edit Post</a></button>
 
-                <form action="{{ route('admin.post.destroy', ['which_posts' => $which_posts, 'post' => $post]) }}" method="POST">
+                <form action="{{ route('admin.post.destroy', ['post' => $post]) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button
@@ -138,7 +138,7 @@
                         <div class="w-full md:w-1/2 lg:w-1/4 my-2">
                             <div class="w-11/12 mx-auto">
                                 <div class="h-42 overflow-hidden bg-green-600 mb-2"><a
-                                        href="{{ route('admin.post.show', ['which_posts' => $which_posts, 'post' => $relatedPost]) }}">
+                                        href="{{ route('admin.post.show', ['post' => $relatedPost]) }}">
                                         @if ($relatedPost->file_type == 'Image')
                                             <img src="{{ asset('/storage/files/posts/' . $relatedPost->file) }}"
                                                 alt="" class="object-fit transition scale-110 hover:scale-100">
@@ -152,7 +152,7 @@
                                 <div>
                                     <span class="text-gray-700">{{ $relatedPost->category->category }}</span>
                                     <h4 class="text-lg text-gray-800 hover:text-green-400"><a
-                                            href="{{ route('admin.post.show', ['which_posts' => $which_posts, 'post' => $relatedPost]) }}">{{ $relatedPost->title }}</a>
+                                            href="{{ route('admin.post.show', ['post' => $relatedPost]) }}">{{ $relatedPost->title }}</a>
                                     </h4>
                                     <span class="my-2 text-gray-700">{{ $relatedPost->author->first_name }}
                                         {{ $relatedPost->author->last_name }} -

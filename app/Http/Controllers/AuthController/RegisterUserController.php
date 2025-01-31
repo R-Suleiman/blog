@@ -3,15 +3,22 @@
 namespace App\Http\Controllers\AuthController;
 
 use App\Http\Controllers\Controller;
+use App\Mail\VerifyEmail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Validation\Rules\Password;
 
 class RegisterUserController extends Controller
 {
     public function create() {
+        if(Auth::guard('admin')->check() || Auth::guard('web')->check()) {
+            return redirect()->route('index');
+        }
+
         return view("auth.register");
     }
 
@@ -25,9 +32,10 @@ class RegisterUserController extends Controller
 
       $user = User::create($attributes);
 
-      Auth::login($user);
+      // send verification email
+      Mail::to($user->email)->send(new VerifyEmail($user));
 
-    return to_route('admin-dashboard')->with('message', 'Registration successfully!');
+       return redirect()->route('login')->with('message', 'Verification email has been sent to your email to verify your account!');
 
     }
 }

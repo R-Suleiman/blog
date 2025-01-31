@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\Admins;
 
+use App\Mail\NewTopicPost;
 use App\Models\Admin;
 use App\Models\Post;
 use App\Http\Controllers\Controller;
 use App\Models\PostCategory;
+use App\Models\Subscriber;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 use Storage;
 
 class PostsController extends Controller
@@ -20,7 +23,7 @@ class PostsController extends Controller
     {
         $admin = Auth::guard("admin")->user();
 
-        if ($admin->rank == 1) {
+        if ($admin->rank === 1) {
             if ($which_posts == 'other') {
                 $posts = Post::where('admin_id', '!=', $admin->id)->orderBy("created_at", "desc")->paginate(10);
             } else if ($which_posts == "my") {
@@ -36,16 +39,16 @@ class PostsController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create($which_posts)
+    public function create()
     {
         $categories = PostCategory::all();
-        return view('admin.posts.create', ['which_posts' => $which_posts, 'categories' => $categories]);
+        return view('admin.posts.create', ['categories' => $categories]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store($which_posts, Request $request)
+    public function store(Request $request)
     {
         $post = $request->validate(
             [
@@ -80,37 +83,43 @@ class PostsController extends Controller
             $post['featured'] = 0;
         }
 
-        Post::create($post);
+        $post = Post::create($post);
 
-        return to_route('admin.posts.index')->with('message', 'Post created Successfully!');
+        // send mails to subscribers
+        $subscribers = Subscriber::all();
+        foreach($subscribers as $subscriber) {
+            Mail::to($subscriber->email)->send(new NewTopicPost($post, 'Post', $subscriber));
+        }
+
+        return to_route('admin.post.index', ['which_posts' => 'my'])->with('message', 'Post created Successfully!');
 
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($which_posts, Post $post)
+    public function show(Post $post)
     {
         $relatedPosts = Post::where('category_id', $post->category->id)->limit(4)->get();
         $categories = PostCategory::all();
 
-        return view('admin.posts.show', ['which_posts' => $which_posts, 'post' => $post, 'relatedPosts' => $relatedPosts, 'categories' => $categories]);
+        return view('admin.posts.show', ['post' => $post, 'relatedPosts' => $relatedPosts, 'categories' => $categories]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($which_posts, Post $post)
+    public function edit(Post $post)
     {
         $categories = PostCategory::all();
 
-        return view('admin.posts.edit', ['which_posts' => $which_posts, 'post' => $post, 'categories' => $categories]);
+        return view('admin.posts.edit', ['post' => $post, 'categories' => $categories]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $which_posts, Post $post)
+    public function update(Request $request, Post $post)
     {
         $updatedPost = $request->validate(
             [
@@ -148,19 +157,20 @@ class PostsController extends Controller
         } else {
             $updatedPost['featured'] = 0;
         }
+        $updatedPost['category_id'] = PostCategory::where('category', $request->category)->first()->id;
 
         $relatedPosts = Post::where('category_id', $post->category->id)->limit(4)->get();
         $categories = PostCategory::all();
 
         $post->update($updatedPost);
 
-        return to_route('admin.post.show', ['which_posts' => $which_posts, 'post' => $post, 'relatedPosts' => $relatedPosts, 'categories' => $categories])->with('message', 'Post Updated Successfully!');
+        return to_route('admin.post.show', ['post' => $post, 'relatedPosts' => $relatedPosts, 'categories' => $categories])->with('message', 'Post Updated Successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($which_posts, Post $post)
+    public function destroy(Post $post)
     {
         $path = 'files/posts/';
 
@@ -172,6 +182,17 @@ class PostsController extends Controller
 
         $post->delete();
 
-        return to_route('admin.post.index')->with('message', 'Post deleted');
+        return to_route('admin.post.index', ['which_posts' => 'my'])->with('message', 'Post deleted');
+    }
+
+    public function search() {
+        return view('admin.posts.search-results');
+    }
+
+    public function searchResults(Request $request) {
+        $search = $request->input('search');
+        $posts = Post::with('author')->where('title', 'LIKE', "%{$search}%")->orderBy('created_at','desc')->paginate(15);
+
+        return view('admin.posts.search-results', ['posts' => $posts, 'search' => $search, 'retultsCount' => $posts->count()]);
     }
 }

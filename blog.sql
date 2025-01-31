@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 01, 2025 at 04:21 PM
+-- Generation Time: Feb 01, 2025 at 12:11 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -76,6 +76,21 @@ CREATE TABLE `cache_locks` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `comment_likes`
+--
+
+CREATE TABLE `comment_likes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `comment_id` bigint(20) UNSIGNED NOT NULL,
+  `likable_type` varchar(255) NOT NULL,
+  `likable_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `failed_jobs`
 --
 
@@ -92,6 +107,29 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `inquiries`
+--
+
+CREATE TABLE `inquiries` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `message` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `inquiries`
+--
+
+INSERT INTO `inquiries` (`id`, `first_name`, `last_name`, `email`, `message`, `created_at`, `updated_at`) VALUES
+(1, 'Jonas', 'Blue', 'jonas@example.com', 'Contact Message Testing...', '2025-01-30 05:49:24', '2025-01-30 05:49:24');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `jobs`
 --
 
@@ -104,6 +142,13 @@ CREATE TABLE `jobs` (
   `available_at` int(10) UNSIGNED NOT NULL,
   `created_at` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `jobs`
+--
+
+INSERT INTO `jobs` (`id`, `queue`, `payload`, `attempts`, `reserved_at`, `available_at`, `created_at`) VALUES
+(1, 'default', '{\"uuid\":\"5e4edeb4-ab48-484c-afed-01bd86e6e11b\",\"displayName\":\"App\\\\Events\\\\CommentEvent\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\",\"command\":\"O:38:\\\"Illuminate\\\\Broadcasting\\\\BroadcastEvent\\\":14:{s:5:\\\"event\\\";O:23:\\\"App\\\\Events\\\\CommentEvent\\\":1:{s:7:\\\"comment\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:24:\\\"App\\\\Models\\\\TopicComments\\\";s:2:\\\"id\\\";i:24;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:7:\\\"backoff\\\";N;s:13:\\\"maxExceptions\\\";N;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;}\"}}', 0, NULL, 1737537137, 1737537137);
 
 -- --------------------------------------------------------
 
@@ -147,7 +192,13 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (24, '2024_12_20_114630_create_admins_table', 1),
 (25, '2024_12_21_224406_create_post_categories_table', 1),
 (26, '2024_12_21_224503_create_posts_table', 1),
-(27, '2024_12_24_201856_add_featured_to_posts_table', 1);
+(27, '2024_12_24_201856_add_featured_to_posts_table', 1),
+(30, '2025_01_21_072137_create_topics_table', 2),
+(31, '2025_01_21_072815_create_topic_comments_table', 2),
+(32, '2025_01_27_132232_create_topic_likes_table', 3),
+(33, '2025_01_28_132733_create_comment_likes_table', 4),
+(34, '2025_01_30_080005_create_inquiries_table', 5),
+(37, '2025_01_30_093845_create_subscribers_table', 6);
 
 -- --------------------------------------------------------
 
@@ -188,8 +239,8 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `admin_id`, `category_id`, `topic`, `title`, `description`, `likes`, `dislikes`, `file`, `file_type`, `created_at`, `updated_at`, `featured`) VALUES
-(1, 1, 1, 'machine Learning', 'openAI\'s large language model chatGPT shocks the world!', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam esse cumque fuga expedita? Ipsum, ipsam voluptas corrupti, dolorum fugit labore quod totam molestias perspiciatis optio eos repellat nam, culpa illo.\r\nUnde suscipit culpa iure doloremque et ducimus animi nemo, recusandae fugiat excepturi quam. Unde dolorem, architecto magni autem beatae eos nisi totam quas itaque ex labore doloribus vel ipsa fuga.\r\nOptio voluptatibus adipisci illo accusantium nihil neque facilis voluptates, alias aliquam debitis cum deleniti quasi maiores ipsum ad eveniet omnis, deserunt impedit vitae? Non sed aperiam ut placeat veritatis reiciendis!', 0, 0, 'Tech-skills-2022-1.png-1735206566.png', 'Image', '2024-12-26 06:49:27', '2024-12-26 06:49:27', 1),
-(2, 2, 1, 'AI', 'Concern over the rapid growth of AI on people\'s safety', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius vel autem sit tempore deleniti, omnis quaerat temporibus laudantium. Exercitationem neque voluptates accusamus animi itaque quod sit eos distinctio assumenda quibusdam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi quae quam illum, voluptate eius nobis dolorum? Debitis laudantium quam ut porro, vel asperiores perspiciatis accusamus quisquam earum iusto eum numquam.', 0, 0, 'Capture.PNG-1735305648.PNG', 'Image', '2024-12-27 10:20:48', '2024-12-27 20:30:53', 1);
+(2, 2, 7, 'AI', 'Concern over the rapid growth of AI on people\'s safety', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius vel autem sit tempore deleniti, omnis quaerat temporibus laudantium. Exercitationem neque voluptates accusamus animi itaque quod sit eos distinctio assumenda quibusdam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi quae quam illum, voluptate eius nobis dolorum? Debitis laudantium quam ut porro, vel asperiores perspiciatis accusamus quisquam earum iusto eum numquam.', 0, 0, 'Capture.PNG-1735305648.PNG', 'Image', '2024-12-27 10:20:48', '2025-01-31 20:00:27', 1),
+(5, 1, 7, 'machine Learning', 'The rapid emergency of a new AI model DeepSeek as a big competitor to OpenAi\'s ChatCPT', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius vel autem sit tempore deleniti, omnis quaerat temporibus laudantium. Exercitationem neque voluptates accusamus animi itaque quod sit eos distinctio assumenda quibusdam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi quae quam illum, voluptate eius nobis dolorum? Debitis laudantium quam ut porro, vel asperiores perspiciatis accusamus quisquam earum iusto eum numquam.', 0, 0, 'Tech-skills-2022-1.png-1738360421.png', 'Image', '2025-01-31 18:53:41', '2025-01-31 19:59:42', 1);
 
 -- --------------------------------------------------------
 
@@ -209,9 +260,9 @@ CREATE TABLE `post_categories` (
 --
 
 INSERT INTO `post_categories` (`id`, `category`, `created_at`, `updated_at`) VALUES
-(1, 'AI', '2024-12-26 06:47:21', '2024-12-26 06:47:21'),
-(2, 'Cyber Security', '2024-12-26 06:47:28', '2024-12-26 06:47:28'),
-(3, 'Robotics', '2024-12-26 06:47:37', '2024-12-26 06:47:37');
+(7, 'Knowledge', '2025-01-31 19:35:21', '2025-01-31 19:35:21'),
+(8, 'Sports', '2025-01-31 19:35:30', '2025-01-31 19:35:30'),
+(9, 'Background', '2025-01-31 19:35:40', '2025-01-31 19:35:40');
 
 -- --------------------------------------------------------
 
@@ -233,7 +284,107 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('UYt6mMcMkxYDCksK09SKomBr4jjHZP76Q3JrzpzN', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSVRPb0pxOGJPMU80S2NNQVZSdVhZRm42dVE0ZkxVQUJpR1lwQmFFciI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9sb2dpbiI7fX0=', 1735658023);
+('Ce7SdvpiWCLZoU2Z1N5BWgAOUxIIxu3HqG3c4A11', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoidDg5bHRxZFZYbllJY21zeFhVR2RJbk5XZ2pBeXZQcGd4UGpLQXRVNCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fXM6NTI6ImxvZ2luX2FkbWluXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1738364831),
+('rGayNBlJuTVfbHqYQhOUaSGoDzgth6QINtmaiYt5', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMUhjb2kxaGpvaTNqdWlBUzM4R0NLTktJOXF1RllOd1dGcFhlblZuRCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1738362809),
+('sSR97sgVbNho4pBL1KsC80dM7Vjuh9iFs8BTAF8x', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiQkh2bTZ1RERrdGVISTJYRmhuNUNxSlZHaFp6bWlycFF6WXd5b1UxUSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9hZG1pbi9ob21lL3Bvc3RzL215Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MjoibG9naW5fYWRtaW5fNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1738362784);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subscribers`
+--
+
+CREATE TABLE `subscribers` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `unsubscribe_token` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `topics`
+--
+
+CREATE TABLE `topics` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `admin_id` bigint(20) UNSIGNED NOT NULL,
+  `category_id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `likes` int(11) NOT NULL DEFAULT 0,
+  `shares` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `topics`
+--
+
+INSERT INTO `topics` (`id`, `admin_id`, `category_id`, `title`, `description`, `likes`, `shares`, `created_at`, `updated_at`) VALUES
+(1, 2, 7, 'The Evolution of Artificial Intelligence (AI)', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas cumque officiis voluptatum dolor iusto sequi debitis eligendi unde dolore nemo. Saepe sapiente nisi quibusdam quia vel ullam minima aut sit.lore\r\nLorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque illum nostrum amet aliquam eligendi et. Aperiam culpa optio dolorum molestiae earum reprehenderit mollitia eum repudiandae, numquam, vero aut eveniet deleniti?\r\nConsectetur, tempore eum sed, delectus voluptatum quibusdam hic reprehenderit suscipit explicabo perferendis itaque amet ullam dignissimos necessitatibus nam ducimus aut placeat voluptates deleniti. Quod amet doloribus velit impedit inventore sapiente!\r\nMagni sed reiciendis aut tenetur, incidunt odio dolores, nulla vitae quae, eaque hic? Quaerat aperiam alias, quibusdam eligendi vel delectus, numquam qui impedit reiciendis sunt, et quo dolorum provident perferendis.\r\nCupiditate possimus ducimus ipsum quisquam autem vero, neque magni voluptatibus quos voluptatem? Dolores ipsa tempore velit maiores repellat doloremque neque odio doloribus? Itaque nisi doloribus dolore nobis laborum corrupti ab!', 1, 0, '2025-01-21 09:25:01', '2025-01-31 20:05:56'),
+(2, 1, 7, 'Let\'s talk about cyber security.', 'These are my views About Cyber Security', 0, 0, '2025-01-25 18:44:54', '2025-01-31 20:05:35');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `topic_comments`
+--
+
+CREATE TABLE `topic_comments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `topic_id` bigint(20) UNSIGNED NOT NULL,
+  `commentable_type` varchar(255) NOT NULL,
+  `commentable_id` bigint(20) UNSIGNED NOT NULL,
+  `comment` text NOT NULL,
+  `likes` int(11) NOT NULL DEFAULT 0,
+  `reply_to` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `topic_comments`
+--
+
+INSERT INTO `topic_comments` (`id`, `topic_id`, `commentable_type`, `commentable_id`, `comment`, `likes`, `reply_to`, `created_at`, `updated_at`) VALUES
+(2, 1, 'App\\Models\\Admin', 2, 'Hello', 0, NULL, '2025-01-21 06:27:38', '2025-01-28 11:25:20'),
+(46, 1, 'App\\Models\\Admin', 2, 'nice review!', 0, 2, '2025-01-24 09:16:57', '2025-01-24 09:16:57'),
+(47, 1, 'App\\Models\\Admin', 2, 'hi', 0, NULL, '2025-01-24 09:25:04', '2025-01-24 09:25:04'),
+(51, 1, 'App\\Models\\Admin', 2, '@Logan: Nice work Logan!', 0, 47, '2025-01-24 11:16:30', '2025-01-24 11:16:30'),
+(87, 1, 'App\\Models\\Admin', 1, 'new comment', 0, NULL, '2025-01-28 18:16:29', '2025-01-28 18:16:29'),
+(88, 1, 'App\\Models\\Admin', 1, 'reply 1', 0, 87, '2025-01-28 18:16:39', '2025-01-28 18:16:39'),
+(89, 1, 'App\\Models\\Admin', 1, 'reply 2', 0, 87, '2025-01-28 18:16:53', '2025-01-28 18:16:53'),
+(90, 1, 'App\\Models\\Admin', 1, 'reply 1 1', 0, 88, '2025-01-28 18:17:06', '2025-01-28 18:17:06'),
+(91, 1, 'App\\Models\\Admin', 1, 'reply 2 2', 0, 89, '2025-01-28 18:17:25', '2025-01-28 18:17:25'),
+(92, 1, 'App\\Models\\Admin', 1, 'reply 2 2 2', 0, 91, '2025-01-28 18:17:37', '2025-01-28 18:17:37'),
+(93, 1, 'App\\Models\\Admin', 1, 'reply 3', 0, 87, '2025-01-28 18:17:51', '2025-01-28 18:17:51'),
+(94, 1, 'App\\Models\\Admin', 1, 'reply 1 1 2', 0, 88, '2025-01-28 18:21:58', '2025-01-28 18:21:58');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `topic_likes`
+--
+
+CREATE TABLE `topic_likes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `topic_id` bigint(20) UNSIGNED NOT NULL,
+  `likable_type` varchar(255) NOT NULL,
+  `likable_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `topic_likes`
+--
+
+INSERT INTO `topic_likes` (`id`, `topic_id`, `likable_type`, `likable_id`, `created_at`, `updated_at`) VALUES
+(17, 1, 'App\\Models\\Admin', 1, '2025-01-28 05:39:06', '2025-01-28 05:39:06');
 
 -- --------------------------------------------------------
 
@@ -246,6 +397,7 @@ CREATE TABLE `users` (
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `photo` varchar(200) DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
@@ -257,9 +409,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Senior', 'McAllister', 'seniorsuleiman2901@gmail.com', NULL, '$2y$12$q1c/effrSsuhISHs6CLieeQHdeTp8VsYGYVqHtJIlEWc5Sdc2BwOC', NULL, '2024-12-26 07:17:04', '2024-12-31 12:13:16'),
-(2, 'Mira', 'Neil', 'mira@example.com', NULL, '$2y$12$yRlQsPcAUibIfz0amKahX.YTQVZKhf3QV4PVkQopKkaYd0JnRtVUO', NULL, '2024-12-27 21:58:33', '2024-12-27 21:58:33');
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `photo`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Senior', 'McAllister', 'seniorsuleiman@gmail.com', NULL, NULL, '$2y$12$q1c/effrSsuhISHs6CLieeQHdeTp8VsYGYVqHtJIlEWc5Sdc2BwOC', NULL, '2024-12-26 07:17:04', '2024-12-31 12:13:16'),
+(2, 'Mira', 'Neil', 'mira@example.com', 'user.avif-1737707127.avif', NULL, '$2y$12$yRlQsPcAUibIfz0amKahX.YTQVZKhf3QV4PVkQopKkaYd0JnRtVUO', NULL, '2024-12-27 21:58:33', '2025-01-24 05:25:27'),
+(3, 'Pedri', 'Gavi', 'seniorsuleiman2901@gmail.com', NULL, '2025-01-30 04:54:02', '$2y$12$8535J7CDiE5iRdeZN4Uw3.3YLTJ2t1rBnDlmxGoFH20sw7ocbfgN.', NULL, '2025-01-29 06:50:36', '2025-01-30 04:54:02');
 
 --
 -- Indexes for dumped tables
@@ -284,11 +437,25 @@ ALTER TABLE `cache_locks`
   ADD PRIMARY KEY (`key`);
 
 --
+-- Indexes for table `comment_likes`
+--
+ALTER TABLE `comment_likes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `comment_likes_comment_id_foreign` (`comment_id`),
+  ADD KEY `comment_likes_likable_type_likable_id_index` (`likable_type`,`likable_id`);
+
+--
 -- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `inquiries`
+--
+ALTER TABLE `inquiries`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `jobs`
@@ -338,6 +505,37 @@ ALTER TABLE `sessions`
   ADD KEY `sessions_last_activity_index` (`last_activity`);
 
 --
+-- Indexes for table `subscribers`
+--
+ALTER TABLE `subscribers`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `subscribers_email_unique` (`email`);
+
+--
+-- Indexes for table `topics`
+--
+ALTER TABLE `topics`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `admin_id` (`admin_id`),
+  ADD KEY `category_id` (`category_id`);
+
+--
+-- Indexes for table `topic_comments`
+--
+ALTER TABLE `topic_comments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `topic_comments_commentable_type_commentable_id_index` (`commentable_type`,`commentable_id`),
+  ADD KEY `topic_id` (`topic_id`);
+
+--
+-- Indexes for table `topic_likes`
+--
+ALTER TABLE `topic_likes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `topic_likes_topic_id_foreign` (`topic_id`),
+  ADD KEY `topic_likes_likable_type_likable_id_index` (`likable_type`,`likable_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -355,44 +553,86 @@ ALTER TABLE `admins`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `comment_likes`
+--
+ALTER TABLE `comment_likes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `inquiries`
+--
+ALTER TABLE `inquiries`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `post_categories`
 --
 ALTER TABLE `post_categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `subscribers`
+--
+ALTER TABLE `subscribers`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `topics`
+--
+ALTER TABLE `topics`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `topic_comments`
+--
+ALTER TABLE `topic_comments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+
+--
+-- AUTO_INCREMENT for table `topic_likes`
+--
+ALTER TABLE `topic_likes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `comment_likes`
+--
+ALTER TABLE `comment_likes`
+  ADD CONSTRAINT `comment_likes_comment_id_foreign` FOREIGN KEY (`comment_id`) REFERENCES `topic_comments` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `posts`
@@ -400,6 +640,25 @@ ALTER TABLE `users`
 ALTER TABLE `posts`
   ADD CONSTRAINT `posts_admin_id_foreign` FOREIGN KEY (`admin_id`) REFERENCES `admins` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `posts_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `post_categories` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `topics`
+--
+ALTER TABLE `topics`
+  ADD CONSTRAINT `topics_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `admins` (`id`),
+  ADD CONSTRAINT `topics_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `post_categories` (`id`);
+
+--
+-- Constraints for table `topic_comments`
+--
+ALTER TABLE `topic_comments`
+  ADD CONSTRAINT `topic_comments_ibfk_1` FOREIGN KEY (`topic_id`) REFERENCES `topics` (`id`);
+
+--
+-- Constraints for table `topic_likes`
+--
+ALTER TABLE `topic_likes`
+  ADD CONSTRAINT `topic_likes_topic_id_foreign` FOREIGN KEY (`topic_id`) REFERENCES `topics` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
