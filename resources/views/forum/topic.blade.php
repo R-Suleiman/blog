@@ -27,7 +27,10 @@
                     </p>
                 </div>
 
-                <x-topic-reactions :topic="$topic" />
+                <div class="flex flex-col md:flex-row items-center justify-between">
+                    <x-topic-reactions :topic="$topic" />
+                    <x-post-share />
+                </div>
             </div>
 
         </div>
@@ -37,9 +40,13 @@
                 <h3 class="font-semibold text-2xl mb-4">Conversations</h3>
 
                 <div class="w-full" id="comments-section">
+                    @if ($comments->count() > 0)
                     @foreach ($comments as $comment)
                     <x-comment :comment="$comment" />
                     @endforeach
+                    @else
+                    <div><p class="text-lg text-gray-600 text-center">No comments yet. Be the first to share your thoughts.</p></div>
+                    @endif
                 </div>
 
                 <div class="w-full mt-8">

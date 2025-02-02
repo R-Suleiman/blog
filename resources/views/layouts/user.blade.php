@@ -14,7 +14,10 @@
 <body>
 
     <section class="w-full relative">
-        <aside class="w-2/12 fixed left-0 top-0 bg-gray-800 border-r-2 border-green-400 h-full">
+        <aside class="nav w-8/12 z-50 lg:w-2/12 fixed left-0 top-0 bg-gray-800 border-r-2 border-green-400 h-full hidden lg:block">
+
+            <div class="ml-auto w-fit m-2 block lg:hidden"> <button class="close-nav text-2xl w-8"><i class="fa fa-times text-green-400 w-full"></i></button></div>
+
             <div class="w-2/3 mx-auto text-center my-4 p-4 flex flex-col items-center">
                 <img src="{{ asset('img/user.avif') }}" alt="" class="w-2/3 rounded-full my-2">
                 <h2 class="text-3xl text-green-400">{{ Auth::guard('web')->user()->first_name }}</h2>
@@ -47,13 +50,14 @@
             </ul>
 
         </aside>
-        <div class="w-10/12 float-right">
-            <div class="w-full p-4 bg-gray-800">
+        <div class="w-full lg:w-10/12 float-right">
+            <div class="w-full p-4 bg-gray-800 flex items-center justify-between">
                 <h1 class="text-2xl text-white">Welcome, <span class="text-green-400">{{ Auth::guard('web')->user()->first_name }}</span></h1>
+                <button class="open-nav text-xl w-8 block lg:hidden"><i class="fa fa-align-justify text-green-400 w-full"></i></button>
             </div>
 
             @session('message')
-                <div class="flash-message w-full bg-green-700 py-2 px-4 my-4 mx-2 text-lg text-white">
+                <div id="flash-message" class="w-full bg-green-700 py-2 px-4 my-4 mx-2 text-lg text-white">
                     {{ session('message') }}
                 </div>
             @endsession
@@ -63,22 +67,8 @@
     </section>
 
     {{-- @include('partials.jslinks') --}}
-    <script>
 
-        document.addEventListener("DOMContentLoaded", function () {
-            const flashMessage = document.querySelectorAll("flash-message");
-            flashMessage.forEach((message) => {
-                if (message) {
-    
-                    setTimeout(() => {
-                        message.style.transition = "opacity 0.5s ease";
-                        message.style.opacity = "0";
-                        setTimeout(() => message.remove(), 500);
-                    }, 5000);
-                }
-            })
-        });
-    </script>
+    <script src="{{ asset('js/user.js') }}"></script>
 </body>
 
 </html>

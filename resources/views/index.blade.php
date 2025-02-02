@@ -7,10 +7,10 @@
         style="background-image: url('img/tech1.png')">
         <div class="overlay w-full p-12">
             <h2 class="text-3xl md:text-5xl text-white my-2 mr-2">Welcome to <span class="text-green-400">Mwanateknolojia</span></h2>
-            <h3 class="text-white text-lg md:text-2xl my-2 mr-2">Insights into the Latest Tech Trends</h3>
-            <h3 class="text-white text-md md:text-xl my-2 mr-2">Stay updated on various tech topics; <span
-                    class="text-green-400">AI</span>, <span class="text-green-400">Programming</span>, <span
-                    class="text-green-400">Cybersecurity</span>, and more.
+            <h3 class="text-white text-lg md:text-2xl my-2 mr-2">Insights into the Latest News and Trends</h3>
+            <h3 class="text-white text-md md:text-xl my-2 mr-2">Stay updated on various topics; <span
+                    class="text-green-400">Knowledge</span>, <span class="text-green-400">Tech</span>, <span
+                    class="text-green-400">Sports</span>, and more.
             </h3>
         </div>
     </section>
@@ -199,7 +199,7 @@
     {{-- Newsletter --}}
     <section class="w-full p-12 bg-gray-700">
         <h3 class="text-4xl text-green-400 text-center">Subscibe to our Newsletter</h3>
-        <p class="text-lg text-white text-center my-2">Stay updated with the latest news and posts as they are posted</p>
+        <p class="text-lg text-white text-center my-2">Stay updated with the latest news and posts as they are updated</p>
         <div class="w-full md:w-2/5 mx-auto my-4">
             @if (session('email-success'))
                 <div class="flash-message mt-4 text-green-500">{{ session('email-success') }}</div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 01, 2025 at 12:11 AM
+-- Generation Time: Feb 02, 2025 at 09:02 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -239,8 +239,8 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `admin_id`, `category_id`, `topic`, `title`, `description`, `likes`, `dislikes`, `file`, `file_type`, `created_at`, `updated_at`, `featured`) VALUES
-(2, 2, 7, 'AI', 'Concern over the rapid growth of AI on people\'s safety', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius vel autem sit tempore deleniti, omnis quaerat temporibus laudantium. Exercitationem neque voluptates accusamus animi itaque quod sit eos distinctio assumenda quibusdam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi quae quam illum, voluptate eius nobis dolorum? Debitis laudantium quam ut porro, vel asperiores perspiciatis accusamus quisquam earum iusto eum numquam.', 0, 0, 'Capture.PNG-1735305648.PNG', 'Image', '2024-12-27 10:20:48', '2025-01-31 20:00:27', 1),
-(5, 1, 7, 'machine Learning', 'The rapid emergency of a new AI model DeepSeek as a big competitor to OpenAi\'s ChatCPT', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius vel autem sit tempore deleniti, omnis quaerat temporibus laudantium. Exercitationem neque voluptates accusamus animi itaque quod sit eos distinctio assumenda quibusdam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi quae quam illum, voluptate eius nobis dolorum? Debitis laudantium quam ut porro, vel asperiores perspiciatis accusamus quisquam earum iusto eum numquam.', 0, 0, 'Tech-skills-2022-1.png-1738360421.png', 'Image', '2025-01-31 18:53:41', '2025-01-31 19:59:42', 1);
+(2, 2, 11, 'AI', 'Concern over the rapid growth of AI on people\'s safety', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius vel autem sit tempore deleniti, omnis quaerat temporibus laudantium. Exercitationem neque voluptates accusamus animi itaque quod sit eos distinctio assumenda quibusdam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi quae quam illum, voluptate eius nobis dolorum? Debitis laudantium quam ut porro, vel asperiores perspiciatis accusamus quisquam earum iusto eum numquam.', 0, 0, 'Capture.PNG-1735305648.PNG', 'Image', '2024-12-27 10:20:48', '2025-02-02 17:02:07', 1),
+(5, 1, 11, 'machine Learning', 'The rapid emergency of a new AI model DeepSeek as a big competitor to OpenAi\'s ChatCPT', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius vel autem sit tempore deleniti, omnis quaerat temporibus laudantium. Exercitationem neque voluptates accusamus animi itaque quod sit eos distinctio assumenda quibusdam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi quae quam illum, voluptate eius nobis dolorum? Debitis laudantium quam ut porro, vel asperiores perspiciatis accusamus quisquam earum iusto eum numquam.', 0, 0, 'Tech-skills-2022-1.png-1738360421.png', 'Image', '2025-01-31 18:53:41', '2025-02-02 17:01:51', 1);
 
 -- --------------------------------------------------------
 
@@ -260,9 +260,10 @@ CREATE TABLE `post_categories` (
 --
 
 INSERT INTO `post_categories` (`id`, `category`, `created_at`, `updated_at`) VALUES
-(7, 'Knowledge', '2025-01-31 19:35:21', '2025-01-31 19:35:21'),
-(8, 'Sports', '2025-01-31 19:35:30', '2025-01-31 19:35:30'),
-(9, 'Background', '2025-01-31 19:35:40', '2025-01-31 19:35:40');
+(10, 'News', '2025-02-02 16:58:24', '2025-02-02 16:58:24'),
+(11, 'Knowledge', '2025-02-02 17:00:42', '2025-02-02 17:00:42'),
+(12, 'Sports', '2025-02-02 17:00:51', '2025-02-02 17:00:51'),
+(13, 'Background', '2025-02-02 17:00:58', '2025-02-02 17:00:58');
 
 -- --------------------------------------------------------
 
@@ -284,9 +285,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('Ce7SdvpiWCLZoU2Z1N5BWgAOUxIIxu3HqG3c4A11', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoidDg5bHRxZFZYbllJY21zeFhVR2RJbk5XZ2pBeXZQcGd4UGpLQXRVNCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fXM6NTI6ImxvZ2luX2FkbWluXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1738364831),
-('rGayNBlJuTVfbHqYQhOUaSGoDzgth6QINtmaiYt5', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMUhjb2kxaGpvaTNqdWlBUzM4R0NLTktJOXF1RllOd1dGcFhlblZuRCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1738362809),
-('sSR97sgVbNho4pBL1KsC80dM7Vjuh9iFs8BTAF8x', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiQkh2bTZ1RERrdGVISTJYRmhuNUNxSlZHaFp6bWlycFF6WXd5b1UxUSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9hZG1pbi9ob21lL3Bvc3RzL215Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MjoibG9naW5fYWRtaW5fNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1738362784);
+('1yWXdieMyasuupMbzwlXKUFLmNcKZVJVzk2VPArY', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoicGEwT1hWRXZYTlhRTWVBMnlabEhyTEt4WHRNTDZjSURPWlhVNjkwWCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9hZG1pbi9kYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUyOiJsb2dpbl9hZG1pbl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1738526531);
 
 -- --------------------------------------------------------
 
@@ -325,8 +324,8 @@ CREATE TABLE `topics` (
 --
 
 INSERT INTO `topics` (`id`, `admin_id`, `category_id`, `title`, `description`, `likes`, `shares`, `created_at`, `updated_at`) VALUES
-(1, 2, 7, 'The Evolution of Artificial Intelligence (AI)', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas cumque officiis voluptatum dolor iusto sequi debitis eligendi unde dolore nemo. Saepe sapiente nisi quibusdam quia vel ullam minima aut sit.lore\r\nLorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque illum nostrum amet aliquam eligendi et. Aperiam culpa optio dolorum molestiae earum reprehenderit mollitia eum repudiandae, numquam, vero aut eveniet deleniti?\r\nConsectetur, tempore eum sed, delectus voluptatum quibusdam hic reprehenderit suscipit explicabo perferendis itaque amet ullam dignissimos necessitatibus nam ducimus aut placeat voluptates deleniti. Quod amet doloribus velit impedit inventore sapiente!\r\nMagni sed reiciendis aut tenetur, incidunt odio dolores, nulla vitae quae, eaque hic? Quaerat aperiam alias, quibusdam eligendi vel delectus, numquam qui impedit reiciendis sunt, et quo dolorum provident perferendis.\r\nCupiditate possimus ducimus ipsum quisquam autem vero, neque magni voluptatibus quos voluptatem? Dolores ipsa tempore velit maiores repellat doloremque neque odio doloribus? Itaque nisi doloribus dolore nobis laborum corrupti ab!', 1, 0, '2025-01-21 09:25:01', '2025-01-31 20:05:56'),
-(2, 1, 7, 'Let\'s talk about cyber security.', 'These are my views About Cyber Security', 0, 0, '2025-01-25 18:44:54', '2025-01-31 20:05:35');
+(1, 2, 11, 'The Evolution of Artificial Intelligence (AI)', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas cumque officiis voluptatum dolor iusto sequi debitis eligendi unde dolore nemo. Saepe sapiente nisi quibusdam quia vel ullam minima aut sit.lore\r\nLorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque illum nostrum amet aliquam eligendi et. Aperiam culpa optio dolorum molestiae earum reprehenderit mollitia eum repudiandae, numquam, vero aut eveniet deleniti?\r\nConsectetur, tempore eum sed, delectus voluptatum quibusdam hic reprehenderit suscipit explicabo perferendis itaque amet ullam dignissimos necessitatibus nam ducimus aut placeat voluptates deleniti. Quod amet doloribus velit impedit inventore sapiente!\r\nMagni sed reiciendis aut tenetur, incidunt odio dolores, nulla vitae quae, eaque hic? Quaerat aperiam alias, quibusdam eligendi vel delectus, numquam qui impedit reiciendis sunt, et quo dolorum provident perferendis.\r\nCupiditate possimus ducimus ipsum quisquam autem vero, neque magni voluptatibus quos voluptatem? Dolores ipsa tempore velit maiores repellat doloremque neque odio doloribus? Itaque nisi doloribus dolore nobis laborum corrupti ab!', 1, 0, '2025-01-21 09:25:01', '2025-02-02 17:01:32'),
+(2, 1, 11, 'Let\'s talk about cyber security.', 'These are my views About Cyber Security', 0, 0, '2025-01-25 18:44:54', '2025-02-02 17:01:12');
 
 -- --------------------------------------------------------
 
@@ -592,7 +591,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `post_categories`
 --
 ALTER TABLE `post_categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `subscribers`

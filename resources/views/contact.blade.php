@@ -12,12 +12,11 @@
 
     <section class="w-11/12 mx-auto my-4 md:p-8">
         <div class="w-full">
-           <p class="text-lg text-gray-700 text-justify"> Lorem ipsum, dolor sit amet consectetur adipisicing elit. A rerum soluta illum debitis facilis, repudiandae adipisci numquam consequuntur ad amet quae dolores voluptatibus, asperiores eos illo itaque culpa doloremque ipsam.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, quisquam ab ad ducimus a pariatur, quam non delectus possimus libero consectetur provident. Totam placeat adipisci, enim dolor mollitia porro asperiores.</p>
+           <p class="text-lg text-gray-700 text-justify"> Welcome to Mwanateknolojia blog. For any inqueries please feel free to reach us through the following ways.</p>
         </div>
 
         <div class="w-full my-4">
-            <div class="flex items-center text-lg"><i class="fa fa-envelope text-green-400 mr-2"></i> <span class="text-gray-700 hover:text-green-400"><a href="#">blog@Mwanateknolojia.com</a></span></div>
+            <div class="flex items-center text-lg"><i class="fa fa-envelope text-green-400 mr-2"></i> <span class="text-gray-700 hover:text-green-400"><a href="#">blog@mwanateknolojia.com</a></span></div>
         </div>
 
         {{-- inquiries --}}
