@@ -21,47 +21,48 @@
             </form>
         </div>
 
-        <p class="text-lg">{{ $searchCount }} Results Found!</p>
+        @if ($searchCount >= 0)
+            <p class="text-xl text-green-700 my-4">{{ $searchCount }} Results Found!</p>
+        @endif
 
         @if (isset($posts))
 
-        @if ($posts->count() > 0)
-            <div class="w-full p-2 my-4 flex flex-col md:flex-row flex-wrap">
-                @foreach ($posts as $post)
-                    <div class="w-full md:w-1/2 lg:w-1/4 my-2">
-                        <div class="w-11/12 mx-auto">
-                            <div class="h-42 overflow-hidden bg-green-600 mb-2"><a href="{{ route('post', $post->title) }}">
-                                    @if ($post->file_type == 'Image')
-                                        <img src="{{ asset('/storage/files/posts/' . $post->file) }}" alt=""
-                                            class="object-fit transition scale-110 hover:scale-100">
-                                    @else
-                                        <video src="{{ asset('/storage/files/posts/' . $post->file) }}" controls>
-                                            Your browser does not support video!
-                                        </video>
-                                    @endif
-                                </a></div>
-                            <div>
-                                <span class="text-gray-700">{{ $post->category->category }}</span>
-                                <h4 class="text-lg text-gray-800 hover:text-green-400"><a
-                                        href="{{ route('post', $post->title) }}">{{ $post->title }}</a></h4>
-                                <span class="my-2 text-gray-700">
-                                    {{ $post->author->first_name }}
-                                    {{ $post->author->last_name }} -
-                                    {{ $post->created_at->diffInDays(now()) > 7 ? $post->created_at->format('F j, Y') : $post->created_at->diffForHumans() }}
-                                </span>
+            @if ($posts->count() > 0)
+                <div class="w-full p-2 my-4 flex flex-col md:flex-row flex-wrap">
+                    @foreach ($posts as $post)
+                        <div class="w-full md:w-1/2 lg:w-1/4 my-2">
+                            <div class="w-11/12 mx-auto">
+                                <div class="h-42 overflow-hidden bg-green-600 mb-2"><a
+                                        href="{{ route('post', $post->title) }}">
+                                        @if ($post->file_type == 'Image')
+                                            <img src="{{ asset('/storage/files/posts/' . $post->file) }}" alt=""
+                                                class="object-fit transition scale-110 hover:scale-100">
+                                        @else
+                                            <video src="{{ asset('/storage/files/posts/' . $post->file) }}" controls>
+                                                Your browser does not support video!
+                                            </video>
+                                        @endif
+                                    </a></div>
+                                <div>
+                                    <span class="text-gray-700">{{ $post->category->category }}</span>
+                                    <h4 class="text-lg text-gray-800 hover:text-green-400"><a
+                                            href="{{ route('post', $post->title) }}">{{ $post->title }}</a></h4>
+                                    <span class="my-2 text-gray-700">
+                                        {{ $post->author->first_name }}
+                                        {{ $post->author->last_name }} -
+                                        {{ $post->created_at->diffInDays(now()) > 7 ? $post->created_at->format('F j, Y') : $post->created_at->diffForHumans() }}
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
-            </div>
-            <div class="w-fit mx-auto">
-                <button
-                    class="py-1 px-4 border border-green-400 text-green-400 text-lg rounded-xl hover:bg-gray-800 hover:text-white my-2 mr-2"><a
-                        href="#">Next <i class="fa fa-arrow-right"></i></a></button>
-            </div>
-        @else
-            <p class="text-xl p-4 text-green-700 text-center">No Posts Found!</p>
-        @endif
+                    @endforeach
+                </div>
+                <div class="w-fit mx-auto">
+                    <button
+                        class="py-1 px-4 border border-green-400 text-green-400 text-lg rounded-xl hover:bg-gray-800 hover:text-white my-2 mr-2"><a
+                            href="#">Next <i class="fa fa-arrow-right"></i></a></button>
+                </div>
+            @endif
         @endif
 
 

@@ -101,7 +101,7 @@ class HomeController extends Controller
         $categories = PostCategory::all();
         $otherPosts = Post::with('author')->orderBy('created_at','desc')->limit(10)->get();
 
-        return view("search-results", ['categories' => $categories,"otherPosts"=> $otherPosts]);
+        return view("search-results", ['categories' => $categories,"otherPosts"=> $otherPosts, 'searchCount' => -1]);
     }
 
     public function search(Request $request)

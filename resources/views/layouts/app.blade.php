@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full">
 
 <head>
     <meta charset="UTF-8">
@@ -11,7 +11,7 @@
     @include('partials.links')
 </head>
 
-<body>
+<body class="flex flex-col min-h-full">
     <x-navbar />
 
     @session('message')
