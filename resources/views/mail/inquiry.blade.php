@@ -1,8 +1,19 @@
-<section style="width: 92%; margin: 0 auto; background-color: rgb(5, 46, 5); padding: 16px;">
-    <p style="font-size: 14px; color: #fff;">A new Contact inquiry received from the Mwanateknolojia Blog </p>
+<!DOCTYPE html>
+<html lang="en">
 
-    <p style="color: white; margin: 4px 0"><strong>Name:</strong> {{ $contact->first_name }} {{ $contact->last_name }}</p>
-    <p style="color: white; margin: 4px 0"><strong>Email:</strong> {{ $contact->email }}</p>
-    <p style="margin: 10px 0; color: white">Message: {{ $contact->message }}</p>
+<head>
+    <meta charset="UTF-8">
+    <title>New Contact Inquiry</title>
+</head>
 
-</section>
+<body style="background-color: #2a2a2a; font-family: Arial, sans-serif; padding: 20px; color: white;">
+    <section style="background-color: #333; padding: 16px; border-radius: 8px;">
+        <p style="font-size: 16px; font-weight: bold;">A new Contact inquiry received from the Mwanateknolojia Blog</p>
+
+        <p style="margin: 10px 0;"><strong>Name:</strong> {{ $contact->first_name }} {{ $contact->last_name }}</p>
+        <p style="margin: 10px 0;"><strong>Email:</strong> {{ $contact->email }}</p>
+        <p style="margin: 10px 0;"><strong>Message:</strong><br> {{ $contact->message }}</p>
+    </section>
+</body>
+
+</html>

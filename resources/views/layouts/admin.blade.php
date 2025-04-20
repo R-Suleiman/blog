@@ -112,6 +112,7 @@
     </section>
 
     <script src="{{ asset('js/admin.js') }}"></script>
+    @include('partials.ckEditor')
 </body>
 
 </html>

@@ -49,7 +49,7 @@
             <div class="w-full my-4">
                 <span class="text-xl text-gray-700 mt-2">{{ $post->topic }}</span>
                 <h3 class="mb-2 text-3xl text-gray-800 font-semibold">{{ $post->title }}</h3>
-                <p class="text-lg text-gray-700 text-justify">{{ $post->description }}</p>
+                <p class="text-lg text-gray-700 text-justify">{!! $post->description !!}</p>
             </div>
 
             {{-- <div class="w-full my-8 flex items-center text-gray-700">

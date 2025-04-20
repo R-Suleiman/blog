@@ -28,7 +28,7 @@ class LoginController extends Controller
 
         $user = User::where('email', $credentials['email'])->first();
         if ($user && !$user->email_verified_at) {
-            return redirect()->route('verification.notice')->with('error', 'Your email is not verified. Please check your inbox or request a new verification email.');
+            return redirect()->route('verification.notice')->with('error', 'Your email is not verified. Please check your email for verification link or request a new verification email.');
         }
 
         // attempt to login as user

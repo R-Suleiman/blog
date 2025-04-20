@@ -23,7 +23,7 @@
 
                 <div class="my-4">
                     <p class="text-lg text-gray-600 text-justify">
-                        {{ $topic->description }}
+                        {!! $topic->description !!}
                     </p>
                 </div>
 

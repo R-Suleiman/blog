@@ -44,7 +44,7 @@
 
             <div class="w-full p-2">
                 <label for="description" class="text-xl mb-2 text-gray-700">Description:</label>
-                <textarea name="description" id="" rows="5" class="w-full border border-green-400 text-lg p-2 outline-none">
+                <textarea name="description" id="" rows="5" class="editor w-full border border-green-400 text-lg p-2 outline-none">
                 {{ $post->description }}
             </textarea>
                 @error('description')
