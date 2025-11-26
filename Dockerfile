@@ -8,15 +8,24 @@ RUN npm run build
 
 # ============= STAGE 2: PHP dependencies & app =============
 FROM composer:2 AS composer
+
+# Install essential PHP extensions for Laravel (required for platform checks)
+RUN apk add --no-cache \
+    libpng-dev libjpeg-turbo-dev freetype-dev libzip-dev oniguruma-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) pdo_mysql mbstring exif pcntl bcmath gd zip
+
 WORKDIR /app
 COPY . .
 COPY --from=vite /app/public/build ./public/build
+
+# Now composer install will succeed
 RUN composer install --optimize-autoloader --no-dev --no-interaction --no-progress
 
 # ============= STAGE 3: Final runtime image =============
 FROM php:8.2-fpm-alpine
 
-# Install PHP extensions + nginx + supervisor
+# Install PHP extensions + nginx + supervisor (same as before)
 RUN apk add --no-cache \
     nginx \
     supervisor \
