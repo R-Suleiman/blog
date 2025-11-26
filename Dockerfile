@@ -45,28 +45,26 @@ RUN composer dump-autoload --optimize
 # ============= STAGE 3: Final runtime image =============
 FROM php:8.2-fpm-alpine
 
-# Install PHP extensions + nginx + supervisor (same as before)
+# Install nginx + supervisor + PostgreSQL driver
 RUN apk add --no-cache \
     nginx \
     supervisor \
-    libpng-dev libjpeg-turbo-dev freetype-dev libzip-dev oniguruma-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) pdo_mysql mbstring exif pcntl bcmath gd zip \
+    libpq-dev \
+    && docker-php-ext-install pdo_pgsql pdo_mysql \
     && rm -rf /var/cache/apk/*
 
-# Copy php-fpm & nginx configs
+# Copy configs
 COPY nginx/default.conf /etc/nginx/http.d/default.conf
 COPY docker/supervisor.conf /etc/supervisor/conf.d/supervisor.conf
 
-# Copy app from previous stages
+# Copy app from composer stage
 COPY --from=composer /app /var/www/html
-COPY --from=vite /app/public/build /var/www/html/public/build
 
 # Permissions
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Copy production entrypoint
+# Copy entrypoint
 COPY docker/production-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/production-entrypoint.sh
 
