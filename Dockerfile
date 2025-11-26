@@ -6,21 +6,26 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-# ============= STAGE 2: PHP dependencies & app =============
-FROM composer:2 AS composer
+# ============= STAGE 2: PHP dependencies & app (PHP 8.2) =============
+FROM composer:2.2 AS composer
 
-# Install essential PHP extensions for Laravel (required for platform checks)
-RUN apk add --no-cache \
-    libpng-dev libjpeg-turbo-dev freetype-dev libzip-dev oniguruma-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) pdo_mysql mbstring exif pcntl bcmath gd zip
+# Pin to PHP 8.2 explicitly (composer:2.2 is still on 8.2, composer:2 is now 8.5)
+# Or use the official php:8.2-cli image with composer installed manually
+# This version is guaranteed to be PHP 8.2.x
+FROM php:8.2-cli AS composer-base
+RUN curl -sSL https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+FROM composer-base AS composer
 WORKDIR /app
+COPY composer.json composer.lock ./
+RUN composer install --optimize-autoloader --no-dev --no-interaction --no-progress --no-scripts
+
+# Now copy the rest of the app and built assets
 COPY . .
 COPY --from=vite /app/public/build ./public/build
 
-# Now composer install will succeed
-RUN composer install --optimize-autoloader --no-dev --no-interaction --no-progress
+# Re-run composer dump-autoload with scripts now that full app is present
+RUN composer dump-autoload --optimize
 
 # ============= STAGE 3: Final runtime image =============
 FROM php:8.2-fpm-alpine
